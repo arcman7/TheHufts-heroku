@@ -140,7 +140,7 @@ function symbolListener(){
     $(".graph").css("display",'block');
     $(".graph").css("height","30em");
     $(".graph").css("width","100%");
-    $(".graph").css("background","url('http://3.bp.blogspot.com/-FjddXJJsIv8/VeaoXmv8HQI/AAAAAAAAGww/PlCl0uSR_9g/s1600/loading.gif')");
+    $(".graph").css("background","url('https://3.bp.blogspot.com/-FjddXJJsIv8/VeaoXmv8HQI/AAAAAAAAGww/PlCl0uSR_9g/s1600/loading.gif')");
   });
 }
 

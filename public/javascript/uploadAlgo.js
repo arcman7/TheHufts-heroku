@@ -70,7 +70,7 @@ function checkLogin(){
    var domain = window.location.href.split('/')[2];
 
    var request = $.ajax({
-      url: "http://"+domain+"/checkLogin",
+      url: "https://"+domain+"/checkLogin",
       type: "get",
       success: function(data, textStatus) {
         if (data.redirect) {
@@ -121,7 +121,7 @@ function uploadFileListener(){
         console.log(fileType)
         var domain = window.location.href.split('/')[2];
         var request = $.ajax({
-          url: "http://"+ domain+"/saveAlgo",
+          url: "https://"+ domain+"/saveAlgo",
           type:"post",
           data: data
         });
@@ -157,7 +157,7 @@ function getUsersAlgoNames (){
   var username = String(window.location).split('=')[1];
 
   $.ajax({
-    url: "http://" + domain + "/getAlgoNames",
+    url: "https://" + domain + "/getAlgoNames",
     type: "post",
     data: {username: username, accessKey: accessKey}
   })
@@ -227,7 +227,7 @@ function algoTesterListener(algoId){
         var data = {username: username, filename: filename, accessKey: "huffer", "symbols": JSON.stringify([ globalSymbol] ), startDate: startDate, endDate: endDate};
         console.log(data);
         var request = $.ajax({
-              url: "http://" + domain + "/hufterAPI",
+              url: "https://" + domain + "/hufterAPI",
               type: "post",
               data: data
             }).done(function (response){

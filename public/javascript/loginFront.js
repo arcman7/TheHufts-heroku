@@ -17,7 +17,7 @@ function formSubmitListener(){
   var domain = window.location.href.split('/')[2];
 
   //var gateKeeperURL = "U2FsdGVkX1/TgCOk5cMhFLg/9AnetMh2IYRno+wQGk78aKwkRS39/rop2c/Cm3SpOtrz2UQHSNgZOie01+kZQg==";
-  var gateKeeperURL = "http://" + domain +"/gateKeeper/knockKnock"
+  var gateKeeperURL = "https://" + domain +"/gateKeeper/knockKnock"
   $("#logIn-button").on("click",function(event){
      event.preventDefault();
      console.log("form submitted");
@@ -56,7 +56,7 @@ function ajaxLoginRouter(data,url){
     //console.log(key);
     data = encrypt(data, key);
     //var loginURL = "U2FsdGVkX18QPZdMyeLqAkP32qAdsz5D1W4iRNrujhzK7jsbsxqL4Fur1NrXDNfk34cDezQ52BUvIP7WBT71sg==";
-    var loginURL = "http://" + domain + '/login';
+    var loginURL = "https://" + domain + '/login';
     var confirmation = encrypt("TheHufts",key);
     $.ajax({
         url: loginURL,//decrypt(loginURL,"TheHufts"),
