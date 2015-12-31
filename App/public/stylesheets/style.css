@@ -1,0 +1,86 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  border: 1px solid black;
+}
+
+html{
+  border: 1px solid black;
+}
+
+a {
+  color: #00B7FF;
+}
+
+h3 {
+  display: inline-block;
+}
+
+div {
+  display: inline-block;
+  border: 1px solid black;
+}
+
+#upload-algo-container {
+  float:right;
+  margin-right: -16em;
+}
+
+#upload {
+  display: inline-block;
+  float: right;
+}
+
+.submit {
+  display: inline-block;
+}
+
+#file-upload {
+  float: right;
+  display: inline-block;
+}
+
+.graph {
+  margin-top: 1em;
+  display: none;
+  border: solid 1px black;
+  background-repeat: no-repeat;
+}
+
+.navbox{
+  background-color: #3276bb;
+  top:3em;
+  right:6em;
+  padding:1em;
+  z-index: 99;
+  display: inline-block;
+  position:fixed;
+}
+
+.login-form{
+  top:3em;
+  right:6em;
+  padding:1em;
+  z-index: 100;
+  display: none;
+  position:fixed;
+}
+.register-form{
+  top:3em;
+  right:6em;
+  padding:1em;
+  z-index: 100;
+  display: none;
+  position:fixed;
+}
+
+.active-form{
+  display: inline-block;
+  background-color: #3276bb;
+}
+.submit{
+  background-color: #4ee884;
+}
+.cancel{
+  background-color: #ed652f;
+}
