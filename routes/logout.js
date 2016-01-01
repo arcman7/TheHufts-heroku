@@ -37,7 +37,7 @@ router.post('/', function (req, res) {
               // All the objects were deleted
               console.log("temp algos destroyed");
               req.user = req.session.user = res.locals.user = null;
-              var response = {redirect: "http://"+req.body.domain+"/landingPage"};
+              var response = {redirect: "https://"+req.body.domain+"/landingPage"};
               response = JSON.stringify(response);
               res.send(response);
               },
@@ -49,7 +49,7 @@ router.post('/', function (req, res) {
          }//end if
          else{
             req.user = req.session.user = res.locals.user = null;
-            var response = {redirect: "http://"+req.body.domain+"/landingPage"};
+            var response = {redirect: "https://"+req.body.domain+"/landingPage"};
             response = JSON.stringify(response);
             res.send(response);
          }
