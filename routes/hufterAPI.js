@@ -69,7 +69,8 @@ function getUserAlgo(req,res,next){
               res.locals.user  = user;
 
                console.log("req.session size: "+ roughSizeOfObject(req.session));
-               var domain = 'localhost:3001/';
+               //var domain = 'localhost:3001/';
+               var domain   = req.body.domain;
                var backtest = 'backtest';
                var algo = req.body.algo;
                var data = {algo: algo,"startDate": req.body.startDate,"endDate": req.body.endDate, "symbols": req.body.symbols, "lang": req.body.lang };

@@ -114,11 +114,11 @@ function uploadFileListener(){
         var filename = file.name.split('.')[0];
         var password = prompt("Password confirmation: ", "password");
         //console.log(password);
-        console.log(algoScript);
+        //console.log(algoScript);
         var encryptedAlgoString = encrypt(algoScript,password);
         //userAlgoFunctions[filename] = encryptedAlgoString;
         var data = {algo: encryptedAlgoString, name: filename, fileType: fileType, password: password};
-        console.log(fileType)
+        //console.log(fileType)
         var domain = window.location.href.split('/')[2];
         var request = $.ajax({
           url: "https://"+ domain+"/saveAlgo",
@@ -224,7 +224,7 @@ function algoTesterListener(algoId){
         var d300ago = new Date(d - 300*3600*1000*24);
         var startDate = yahooDateString(d300ago);
         var filename = algoId.slice(1);
-        var data = {username: username, filename: filename, accessKey: "huffer", "symbols": JSON.stringify([ globalSymbol] ), startDate: startDate, endDate: endDate};
+        var data = {username: username, filename: filename, accessKey: "huffer", "symbols": JSON.stringify([ globalSymbol] ), startDate: startDate, endDate: endDate, domain: domain};
         console.log(data);
         var request = $.ajax({
               url: "https://" + domain + "/hufterAPI",
