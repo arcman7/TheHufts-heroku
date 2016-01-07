@@ -224,7 +224,7 @@ function algoTesterListener(algoId){
         var d300ago = new Date(d - 300*3600*1000*24);
         var startDate = yahooDateString(d300ago);
         var filename = algoId.slice(1);
-        var data = {username: username, filename: filename, accessKey: "huffer", "symbols": JSON.stringify([ globalSymbol] ), startDate: startDate, endDate: endDate, domain: domain};
+        var data = {username: username, filename: filename, accessKey: "huffer", "symbols": JSON.stringify([ globalSymbol] ), startDate: startDate, endDate: endDate, domain: 'https://'};
         console.log(data);
         var request = $.ajax({
               url: "https://" + domain + "/hufterAPI",

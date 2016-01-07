@@ -79,7 +79,7 @@ function getUserAlgo(req,res,next){
                //console.log(data);
                data = aesEncrypt(data,"yolocity");
                data = encodeURIComponent(data);
-               var fullQuery = "https://"+ domain + backtest + "?data="+data;
+               var fullQuery = domain +'hufter/' backtest + "?data="+data;
                console.log("hufter API query: "+fullQuery);
                new Promise(function (resolve, reject){
                   var request = needle.get(fullQuery,
