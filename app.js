@@ -111,20 +111,21 @@ app.use(function (req, res, next) {
 
 app.use('/', index);
 //Front-end assets
-app.use('/query.js', obuscateJS('/query.js'));
-app.use('/uploadAlgo.js', obuscateJS('/uploadAlgo.js'));
-app.use('/bundle.js', obuscateJS('/bundle.js'));
-app.use('/loginFront.js', obuscateJS('/loginFront.js'));
-app.use('/logoutFront.js', obuscateJS('/logoutFront.js'));
+app.use('/query.js',            obuscateJS('/query.js'));
+app.use('/uploadAlgo.js',       obuscateJS('/uploadAlgo.js'));
+app.use('/bundle.js',           obuscateJS('/bundle.js'));
+app.use('/loginFront.js',       obuscateJS('/loginFront.js'));
+app.use('/logoutFront.js',      obuscateJS('/logoutFront.js'));
+app.use('/_globalVariables.js', obuscateJS('/_globalVariables.js'));
 //Routes
-app.use('/gateKeeper', gateKeeper);
-app.use('/login', login);
-app.use('/logout',logout);
-app.use('/users', users);
-app.use('/checkLogin', checkLogin);
-app.use('/saveAlgo', saveAlgo);
+app.use('/gateKeeper',   gateKeeper);
+app.use('/login',        login);
+app.use('/logout',       logout);
+app.use('/users',        users);
+app.use('/checkLogin',   checkLogin);
+app.use('/saveAlgo',     saveAlgo);
 app.use('/getAlgoNames', getAlgoNames);
-app.use('/hufterAPI', hufterAPI);
+app.use('/hufterAPI',    hufterAPI);
 //if no matching route is found this is the default server response
 // app.use(function(req, res, next) {
 //   console.log("error middle ware, requested resource path: "+ req.path);

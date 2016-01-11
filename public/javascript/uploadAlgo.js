@@ -67,11 +67,11 @@ function blockEval(string){
 }
 
 function checkLogin(){
-   var domain = window.location.href.split('/')[2];
 
    var request = $.ajax({
-      url: "https://"+domain+"/checkLogin",
+      url: protocol + "//" + domain + "/checkLogin",
       type: "get",
+      data: {domain: domain, protocol: protocol},
       success: function(data, textStatus) {
         if (data.redirect) {
             // data.redirect contains the string URL to redirect to
@@ -119,9 +119,8 @@ function uploadFileListener(){
         //userAlgoFunctions[filename] = encryptedAlgoString;
         var data = {algo: encryptedAlgoString, name: filename, fileType: fileType, password: password};
         //console.log(fileType)
-        var domain = window.location.href.split('/')[2];
         var request = $.ajax({
-          url: "https://"+ domain+"/saveAlgo",
+          url: protocol + "//" + domain+"/saveAlgo",
           type:"post",
           data: data
         });
@@ -153,11 +152,10 @@ function uploadFileListener(){
 function getUsersAlgoNames (){
   //var accessKey = prompt("Please confirm with your access key: ", "access-key");
   var accessKey = "huffer";
-  var domain = window.location.href.split('/')[2];
   var username = String(window.location).split('=')[1];
 
   $.ajax({
-    url: "https://" + domain + "/getAlgoNames",
+    url: protocol + "//" + domain + "/getAlgoNames",
     type: "post",
     data: {username: username, accessKey: accessKey}
   })
@@ -215,7 +213,6 @@ function algoTesterListener(algoId){
     e.preventDefault();
     console.log('worked');
     var username = String(window.location).split('=')[1];
-    var domain = window.location.href.split('/')[2];
 
     if(globalSymbol){
       //new Promise(resolve,reject){
@@ -224,10 +221,10 @@ function algoTesterListener(algoId){
         var d300ago = new Date(d - 300*3600*1000*24);
         var startDate = yahooDateString(d300ago);
         var filename = algoId.slice(1);
-        var data = {username: username, filename: filename, accessKey: "huffer", "symbols": JSON.stringify([ globalSymbol] ), startDate: startDate, endDate: endDate, domain: 'https://'};
+        var data = {username: username, filename: filename, accessKey: "huffer", "symbols": JSON.stringify([ globalSymbol] ), startDate: startDate, endDate: endDate, domain: domain, protocol: protocol};
         console.log(data);
         var request = $.ajax({
-              url: "https://" + domain + "/hufterAPI",
+              url: protocol + "//" + domain + "/hufterAPI",
               type: "post",
               data: data
             }).done(function (response){

@@ -8,6 +8,7 @@ var SHA256     = require("crypto-js/sha256");
 var SHA3       = require("crypto-js/sha3");
 var session    = require('client-sessions');
 var needle     = require('needle');
+
 var roughSizeOfObject = require('./getAlgoNames').roughSizeOfObject
 function aesDecrypt(string,key){
   var decrypted       = AES.decrypt(string, key);
@@ -70,8 +71,9 @@ function getUserAlgo(req,res,next){
 
                console.log("req.session size: "+ roughSizeOfObject(req.session));
                //var domain = 'localhost:3001/';
-               var domain   = req.body.domain;
-               var backtest = 'backtest';
+               //var domain   = req.body.domain; //dont think we need domain in this route
+               var hufter_domain = "hufter.herokuapp.com";
+               var backtest      = '/backtest';
                var algo = req.body.algo;
                var data = {algo: algo,"startDate": req.body.startDate,"endDate": req.body.endDate, "symbols": req.body.symbols, "lang": req.body.lang };
                //console.log(data);
@@ -79,7 +81,7 @@ function getUserAlgo(req,res,next){
                //console.log(data);
                data = aesEncrypt(data,"yolocity");
                data = encodeURIComponent(data);
-               var fullQuery = domain +"hufter/" + backtest + "?data="+data;
+               var fullQuery = protocol + "//" + hufter_domain + backtest + "?data="+data;
                console.log("hufter API query: "+fullQuery);
                new Promise(function (resolve, reject){
                   var request = needle.get(fullQuery,

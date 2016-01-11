@@ -155,7 +155,7 @@ router.post('/', function (req, res) {
                     req.user = user;
                     req.session.user = user;  //refresh the session value
                     res.locals.user  = user;
-                    response["redirect"]    = "https://"+data.domain+"/dashboard"+ "?username="+user.username;
+                    response["redirect"]    = data.protocol+"//"+data.domain+"/dashboard"+ "?username="+user.username;
                     response[requestType]   = status;
                     response["accessToken"] = aesEncrypt(object.get('accessToken'),key);
                     response = JSON.stringify(response);
@@ -202,7 +202,7 @@ router.post('/', function (req, res) {
             console.log(" user successfully saved")
             status                = true;
             response[requestType] = status;
-            response["redirect"]    = "https://"+data.domain+"/dashboard"+ "?username="+user.get("username");
+            response["redirect"]    = data.protocol+"//"+data.domain+"/dashboard"+ "?username="+user.get("username");
             response              = JSON.stringify(response);
 
             user.email       = user.get('email');
