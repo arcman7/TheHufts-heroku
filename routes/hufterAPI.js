@@ -74,6 +74,7 @@ function getUserAlgo(req,res,next){
                //var domain   = req.body.domain; //dont think we need domain in this route
                var hufter_domain = "hufter.herokuapp.com";
                var backtest      = '/backtest';
+               var protocol      = req.body.protocol;
                var algo = req.body.algo;
                var data = {algo: algo,"startDate": req.body.startDate,"endDate": req.body.endDate, "symbols": req.body.symbols, "lang": req.body.lang };
                //console.log(data);
