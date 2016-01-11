@@ -17,7 +17,7 @@ html.
     <!-- Plugins CSS -->
     <link href="admin/plugins/sweetalert/sweetalert.css" rel="stylesheet">
     <link href="admin/plugins/codemirror/codemirror.css" rel="stylesheet">
-    <link href="admin/plugins/codemirror/midnight.css" rel="stylesheet">
+    <link href="admin/plugins/codemirror/neo.css" rel="stylesheet">
 
 
     <!-- Custom Fonts -->
@@ -25,8 +25,13 @@ html.
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600,400italic,600italic,700,700italic,900' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
   </head>
-
   <body>
+    <style>
+        textarea {
+            color: pink;
+            caret-color: red;
+        }
+    </style>
     <div id="loader">
       <div class="loader-container">
         <div id="preloader_1">
@@ -83,7 +88,7 @@ html.
                        <div id="stock-form-container">
                           <label> Enter Stock Symbol </label>
                        <form>
-                          <input type="text" id="stockSymbol" placeholder="stock symbol">
+                          <input type="text" id="stockSymbol" placeholder="stock symbol" >
                           <input type="submit" class="submit" value="Submit">
                         </div>
                       </form>
@@ -185,7 +190,7 @@ html.
       </div>
     </div>
 
-    <textarea id="code1">
+    <textarea id="code1" >
     <script>
         // Code goes here
 
@@ -230,7 +235,7 @@ html.
                  lineNumbers: true,
                  matchBrackets: true,
                  styleActiveLine: true,
-                 theme:"midnight"
+                 theme:"neo"
              });
 
         });
