@@ -116,8 +116,7 @@ app.use('/uploadAlgo.js',       obuscateJS('/uploadAlgo.js'));
 app.use('/bundle.js',           obuscateJS('/bundle.js'));
 app.use('/loginFront.js',       obuscateJS('/loginFront.js'));
 app.use('/logoutFront.js',      obuscateJS('/logoutFront.js'));
-//app.use('/_globalVariables.js', obuscateJS('/_globalVariables.js'));
-//Routes
+////Routes
 app.use('/gateKeeper',   gateKeeper);
 app.use('/login',        login);
 app.use('/logout',       logout);
