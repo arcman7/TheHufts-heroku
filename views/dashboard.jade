@@ -16,8 +16,8 @@ html.
 
     <!-- Plugins CSS -->
     <link href="admin/plugins/sweetalert/sweetalert.css" rel="stylesheet">
-    <link href="admin/css/plugins/codemirror/codemirror.css" rel="stylesheet">
-    <link href="admin/css/plugins/codemirror/ambiance.css" rel="stylesheet">
+    <link href="admin/plugins/codemirror/codemirror.css" rel="stylesheet">
+    <link href="admin/plugins/codemirror/ambiance.css" rel="stylesheet">
 
 
     <!-- Custom Fonts -->
@@ -185,6 +185,27 @@ html.
       </div>
     </div>
 
+    <textarea id="code1">
+        <script>
+            // Code goes here
+
+            // For demo purpose - animation css script
+            function animationHover(element, animation){
+                element = $(element);
+                element.hover(
+                        function() {
+                            element.addClass('animated ' + animation);
+                        },
+                        function(){
+                            //wait for animation to finish before removing classes
+                            window.setTimeout( function(){
+                                element.removeClass('animated ' + animation);
+                            }, 2000);
+                        });
+            }
+        </script>
+    </textarea>
+
     <!-- Art's scripts -->
     <!-- jQuery -->
     <script src="creativ/default/js/jquery.js"></script>
@@ -202,14 +223,25 @@ html.
     <script src="admin/plugins/codemirror/codemirror.js"></script>
     <script src="admin/plugins/codemirror/mode/javascript/javascript.js"></script>
 
+    <script>
+         $(document).ready(function(){
 
+             var editor_one = CodeMirror.fromTextArea(document.getElementById("code1"), {
+                 lineNumbers: true,
+                 matchBrackets: true,
+                 styleActiveLine: true,
+                 theme:"ambiance"
+             });
+
+        });
+    </script>
 
     <!--[if lt IE 10]>
           <script src="assets/js/placeholder.js"></script>
       <![endif]-->
 
 
-    <!-- Art's end -->
+    <!-- Art's -->
     <!-- Graph's scripts -->
     <script type="text/javascript" src="https://www.parsecdn.com/js/parse-1.5.0.min.js"></script>
     <script src="https://code.highcharts.com/stock/highstock.js"></script>
@@ -217,6 +249,10 @@ html.
     <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
     <script type="text/javascript" src="/javascript/query.js"></script>
     <script type="text/javascript" src="/javascript/keys/parseSecrets.js"></script>
+    <!-- CodeMirror -->
+    <script src="admin/plugins/codemirror/codemirror.js"></script>
+    <script src="admin/plugins/codemirror/mode/javascript/javascript.js"></script>
+    <!-- Art's end -->
      <!-- Ryan's scripts -->
     <script src="https://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/aes.js"></script>
     <script src="https://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha3.js"></script>
