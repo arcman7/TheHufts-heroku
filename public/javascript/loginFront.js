@@ -18,7 +18,7 @@ function formSubmitListener(){
 
   //var gateKeeperURL = "U2FsdGVkX1/TgCOk5cMhFLg/9AnetMh2IYRno+wQGk78aKwkRS39/rop2c/Cm3SpOtrz2UQHSNgZOie01+kZQg==";
   //var gateKeeperURL = "https://" + domain +"/gateKeeper/knockKnock"
-  var gateKeeperURL = protocol + "//" + domain + "/gateKepper/knockKnock";
+  var gateKeeperURL = protocol + "//" + domain + "/gateKeeper/knockKnock";
   $("#logIn-button").on("click",function(event){
      event.preventDefault();
      console.log("form submitted");
