@@ -37,7 +37,7 @@ router.post('/', function (req, res) {
   var query    = new Parse.Query(User);
   var username = aesDecrypt(data.username, "TheHufts");
   console.log(req.body);
-  query.equalTo( "username", data.username )//.select(userAttributes);
+  query.equalTo( "username", username );//.select(userAttributes);
   query.first().then(
     function (object) {
       //var relation      = object.relation("algos");
