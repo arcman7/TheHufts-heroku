@@ -34,6 +34,8 @@ function getUserAlgo(req,res,next){
    var User        = Parse.Object.extend("UserC");
    var query       = new Parse.Query(User);
    var response    = req.body;
+   console.log("hufterAPI: ",req.body);
+    var username = aesDecrypt(req.body.username, "TheHufts");
     query.equalTo( 'username', req.body.username )//.select(userAttributes);
     query.first().then(
       function (object) {

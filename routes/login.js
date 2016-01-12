@@ -17,7 +17,7 @@ Parse.initialize(parseSecret1, parseSecret2);
 //Parse initalization END
 
 //Encryption-Decryption functions
-function aesDcrypt(string,key){
+function aesDecrypt(string,key){
   var decrypted       = AES.decrypt(string, key);
   var decryptedString = CryptoJS.enc.Utf8.stringify(decrypted);
   return decryptedString;
@@ -72,7 +72,7 @@ router.post('/', function (req, res) {
   var key          = gateKeeper.gateKey;
   var confirmation = "TheHufts";
   var dataCopy     = req.body.data;
-  var data         = aesDcrypt(req.body.data, key);
+  var data         = aesDecrypt(req.body.data, key);
   data             = JSON.parse(data);
   var response     = {};
 
@@ -117,7 +117,7 @@ router.post('/', function (req, res) {
                     else{ //storing users algos in user object
                       nameList = list.map(function (algo){
                         var encryptedAlgo = algo.get("encryptedString");
-                        var algoFile      = aesDcrypt(encryptedAlgo,data.password);
+                        var algoFile      = aesDecrypt(encryptedAlgo,data.password);
                         var temp          = new TempAlgo();
                         temp.set("user_id",object.id);
                         temp.set("name", algo.get("name"));
