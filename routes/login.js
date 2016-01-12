@@ -154,7 +154,8 @@ router.post('/', function (req, res) {
                     req.user = user;
                     req.session.user = user;  //refresh the session value
                     res.locals.user  = user;
-                    response["redirect"]    = data.protocol+"//"+data.domain+"/dashboard"+ "?username="+user.username;
+                    var session_id = aesEncrypt(user.username, "TheHufts");
+                    response["redirect"]    = data.protocol+"//"+data.domain+"/dashboard"+ "?username="+session_id;
                     response[requestType]   = status;
                     response["accessToken"] = aesEncrypt(object.get('accessToken'),key);
                     response = JSON.stringify(response);
@@ -194,10 +195,11 @@ router.post('/', function (req, res) {
         user.set("pwd",password);
         user.save(null, {
           success: function(user) {
-            console.log(" user successfully saved")
+            console.log(" user successfully saved");
+            var session_id = aesEncrypt(user.get("username"), "TheHufts");
             status                = true;
             response[requestType] = status;
-            response["redirect"]    = data.protocol+"//"+data.domain+"/dashboard"+ "?username="+user.get("username");
+            response["redirect"]    = data.protocol+"//"+data.domain+"/dashboard"+ "?username="+session_id;
             response              = JSON.stringify(response);
 
             user.email       = user.get('email');

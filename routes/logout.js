@@ -8,6 +8,19 @@ var SHA256     = require("crypto-js/sha256");
 var SHA3       = require("crypto-js/sha3");
 var session    = require('client-sessions');
 
+function aesDecrypt(string,key){
+  var decrypted       = AES.decrypt(string, key);
+  var decryptedString = CryptoJS.enc.Utf8.stringify(decrypted);
+  return decryptedString;
+}
+
+function aesEncrypt(string,key){
+  var encrypted       = AES.encrypt(string,key);
+  //var encryptedString = CryptoJS.enc.Utf8.stringify(encrypted);
+  var encryptedString = encrypted.toString();
+  return encryptedString;
+}
+
 //Parse initialization
 var parseSecret1 = "6JypJXIdsGTnplYK7PJyFzOk6GsgJllAH2tiLdjA";
 var parseSecret2 = "zOuAg8TeFShTPRd0SMq6YkDS3CWTQktdYkE2O5Fm";
@@ -22,6 +35,8 @@ router.post('/', function (req, res) {
   var TempAlgo = Parse.Object.extend("TempAlgo");
   var User     = Parse.Object.extend("UserC");
   var query    = new Parse.Query(User);
+  var username = aesDecrypt(data.username, "TheHufts");
+  console.log(req.body);
   query.equalTo( "username", data.username )//.select(userAttributes);
   query.first().then(
     function (object) {
