@@ -36,7 +36,7 @@ function getUserAlgo(req,res,next){
    var response    = req.body;
    console.log("hufterAPI: ",req.body);
     var username = aesDecrypt(req.body.username, "TheHufts");
-    query.equalTo( 'username', req.body.username )//.select(userAttributes);
+    query.equalTo( 'username', username )//.select(userAttributes);
     query.first().then(
       function (object) {
         console.log("LOGIN: Successfully retrieved user" + object.get("username"));
