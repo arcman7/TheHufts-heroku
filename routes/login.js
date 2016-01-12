@@ -56,7 +56,7 @@ function queryParseUser(options,req,res,next) {
         res.locals.user  = user;
         //console.log("req.session: ", JSON.stringify(req.session));
         //console.log("req.cookies: ", JSON.stringify(req.cookies));
-        // finishing processing the middleware and run the route
+        // finish processing the middleware and run the route
         next();
       },
       error: function(error) {
@@ -77,7 +77,7 @@ router.post('/', function (req, res) {
   var response     = {};
 
   //switching to custom user class, since parse has it's own user class already defined - problems wich are covered later.
-  //use custom fclass name: UserC
+  //use custom class name: UserC
 
   if(confirmation != data.confirmation){
     res.send("{error-code:k}"); //error k = key miss-match
@@ -136,7 +136,6 @@ router.post('/', function (req, res) {
                             console.log("saved raw tempAlgo obeject with no relationships");
                             tempRelation.add(tempAlgo)
                             //tempAlgo.set("Parent",object); //object is the returned user object
-                            //tempAlgo.save().then(
                             object.save().then(
                               function (sucess){
                                 console.log("save updated  tempAlgo success");
@@ -187,15 +186,11 @@ router.post('/', function (req, res) {
         var User     = Parse.Object.extend("UserC");
         var user     = new User();
         console.log("register data :"+JSON.stringify(data));
-        var password = data.password; //aesEncrypt(data.password,"TheHufts");
-        //console.log("password: " + password);
+        var password = data.password;
         user.set("username", data.username);
         user.set("email", data.email);
-        //user.set("password",password);  parse wont let us access passwords or use the User class to login
         //using pwd as alias for password
         user.set("accessToken","TheHufts");
-        //deprecated password storage scheme:
-        //user.set("pwd",aesEncrypt(data.password,"TheHufts"));
         user.set("pwd",password);
         user.save(null, {
           success: function(user) {
