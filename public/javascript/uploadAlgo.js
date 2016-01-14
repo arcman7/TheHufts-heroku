@@ -166,7 +166,7 @@ function getUsersAlgoNames (){
     console.log(response);
     if(response.names){
        response.names.forEach(function (algoName){
-        $("#uploaded-algos-container").append('<tr class="'+algoName+'"><td>'+ algoName+' </td><td><input type="integer" name="principal" class="'+algoName+'" value="dollar amount"></td><td></td><td><a id="'+algoName+'"><i class="fa fa-line-chart text-navy"> Run</i></a></td><td><a class="killRow"><i class="fa fa-times"></i></a></td></tr>');
+        $("#uploaded-algos-container").append('<tr class="'+algoName+'"><td>'+ algoName+' </td><td>$</td><td><input type="integer" name="principal" class="'+algoName+'" value="100.00"></td><td></td><td><a id="'+algoName+'"><i class="fa fa-line-chart text-navy"> Run</i></a></td><td><a class="killRow"><i class="fa fa-times"></i></a></td></tr>');
         algoTesterListener('#'+algoName);
        });
     }
