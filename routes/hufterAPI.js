@@ -47,6 +47,7 @@ function getUserAlgo(req,res,next){
         user.accessToken = accessToken;
         user.username    = object.get('username');
         user.email       = object.get('email');
+        var session_id   = aesEncrypt(user.username, "TheHufts");
         //var relation     = object.relation("algos");
         var tempRelation = object.relation("tempAlgos");
         tempRelation.query().find().then(
@@ -69,6 +70,7 @@ function getUserAlgo(req,res,next){
               }
               req.user = user;
               req.session.user = user;  //refresh the session value
+              req.session.user.session_id = session_id;
               res.locals.user  = user;
 
                console.log("req.session size: "+ roughSizeOfObject(req.session));

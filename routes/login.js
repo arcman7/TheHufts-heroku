@@ -53,6 +53,10 @@ function queryParseUser(options,req,res,next) {
         user.algos       = options.algos;
         req.user         = user;
         req.session.user = user;  //refresh the session value
+
+        var session_id = aesEncrypt(user.username, "TheHufts");
+        req.session.user.session_id = session_id;
+
         res.locals.user  = user;
         //console.log("req.session: ", JSON.stringify(req.session));
         //console.log("req.cookies: ", JSON.stringify(req.cookies));
@@ -155,6 +159,7 @@ router.post('/', function (req, res) {
                     req.session.user = user;  //refresh the session value
                     res.locals.user  = user;
                     var session_id = aesEncrypt(user.username, "TheHufts");
+                    req.session.user.session_id = session_id;
                     response["redirect"]    = data.protocol+"//"+data.domain+"/dashboard"+ "?username="+session_id;
                     response[requestType]   = status;
                     response["accessToken"] = aesEncrypt(object.get('accessToken'),key);
@@ -189,6 +194,7 @@ router.post('/', function (req, res) {
         console.log("register data :"+JSON.stringify(data));
         var password = data.password;
         user.set("username", data.username);
+        var session_id = aesEncrypt(user.username, "TheHufts");
         user.set("email", data.email);
         //using pwd as alias for password
         user.set("accessToken","TheHufts");
@@ -208,6 +214,8 @@ router.post('/', function (req, res) {
 
             req.user         = user;
             req.session.user = user;  //refresh the session value
+            req.session.user.session_id = session_id;
+
             res.locals.user  = user;
           // finishing processing the middleware and run the route
             res.send(response);
