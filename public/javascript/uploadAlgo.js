@@ -128,7 +128,7 @@ function uploadFileListener(){
         request.done(function(response){
           console.log(response);
           var filename = file.name.split('.')[0]
-          $("#uploaded-algos-container").append('<tr class="'+filename+'"><td>'+filename+' </td><td><input type="integer" name="principal" class="'+filename+'" value="dollar amount"></td><td></td><td><a id="'+filename+'"><i class="fa fa-line-chart text-navy"> Run</i></a></td><td><a class="killRow"><i class="fa fa-times"></i></a></td></tr>');
+          $("#uploaded-algos-container").append('<tr class="'+filename+'"><td>'+filename+' </td><td>$</td><td><input type="integer" name="principal" class="'+filename+'" value="100.00"></td><td></td><td><a id="'+filename+'"><i class="fa fa-line-chart text-navy"> Run</i></a></td><td><a class="killRow"><i class="fa fa-times"></i></a></td></tr>');
           algoTesterListener('#'+filename);
 
         });//end done function
@@ -224,6 +224,7 @@ function algoTesterListener(algoId){
         var filename = algoId.slice(1);
         var data = {username: username, filename: filename, accessKey: "huffer", "symbols": JSON.stringify([ globalSymbol] ), startDate: startDate, endDate: endDate, domain: domain, protocol: protocol};
         console.log(data);
+        $(algoId).html('<i class="fa fa-cog fa-spin"></i>');
         var request = $.ajax({
               url: protocol + "//" + domain + "/hufterAPI",
               type: "post",
@@ -247,12 +248,12 @@ function algoTesterListener(algoId){
                 }
                console.log(options.signals);
                results = applyCash(options);
-               console.log(results)
+               //console.log(results);
                graphHome(results.netValue, $(".results"),"Day ", undefined,globalSymbol);
                pluginAlgoResults(results);
                $(".results").css("padding","1px");
                $(".results").css("border","1px solid black");
-
+               $(algoId).html('<i class="fa fa-line-chart text-navy"> Run</i>');
             });
         //resolve(request)
       //}).then(function(response))
