@@ -46,7 +46,7 @@ function queryParseUser(options,req,res,next) {
       success: function(object) {
         console.log("queryParseUser: Successfully retrieved " + object.get("username"));
         //console.log(object.get('pwd'));
-        var user         ={};
+        var user         = {};
         user.email       = object.get('email');
         user.username    = object.get('username');
         user.accessToken = object.get('accessToken');
