@@ -52,6 +52,8 @@ var checkLogin    = require('./routes/checkLogin');
 var saveAlgo      = require('./routes/saveAlgo');
 var getAlgoNames  = require('./routes/getAlgoNames');
 var hufterAPI     = require('./routes/hufterAPI');
+var setBrowserKey = require('./routes/setBrowserKey');
+var passAlgoFile  = require('./routes/passAlgoFile');
 //mozilla session manager
 var session = require('client-sessions');//mozilla
 //error logger for node
