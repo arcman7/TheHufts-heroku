@@ -205,7 +205,7 @@ router.post('/', function (req, res) {
             var session_id = aesEncrypt(user.get("username"), "TheHufts");
             status                = true;
             response[requestType] = status;
-            response["redirect"]    = data.protocol+"//"+data.domain+"/dashboard"+ "?username="+session_id;
+            response["redirect"]  = data.protocol+"//"+data.domain+"/dashboard"+ "?username="+session_id;
             response              = JSON.stringify(response);
 
             user.email       = user.get('email');
@@ -217,8 +217,33 @@ router.post('/', function (req, res) {
             req.session.user.session_id = session_id;
 
             res.locals.user  = user;
-          // finishing processing the middleware and run the route
-            res.send(response);
+
+            //add demo algos to account
+            var DemoAlgo      = Parse.Object.extend("DemoAlgo");
+            var demoQuery     = new Parse.Query(DemoAlgo);
+            var relation     = user.relation("algos");
+            demoQuery.find().then(
+              function (list){
+                list.forEach(function (demoAlgo){
+                  relation.add(demoAlgo);
+                  user.save().then(
+                    function (success){
+                      console.log("save user" + user.get("username") + "with demo algo" + demoAlgo.get("name"));
+                    },
+                    function (error){
+                      console.log("failed to save" + user.get("username") + "with demo algo " + demoAlgo.get("name"));
+                      console.log(error);
+                    }
+                  );//end user.save().then()
+                });//end forEach
+                //After adding demo algos to new user account send response
+                res.send(response);
+              },//end success
+              function (error){
+                console.log("could not find demo algos");
+                console.log(error);
+              }//end error
+            );//demoQuery.find().then() end
           },
           error: function(user, error) {
             console.log("failed to save " + error.message)
