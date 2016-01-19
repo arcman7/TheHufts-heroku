@@ -75,6 +75,7 @@ var userAlgoSave = function (options,response) {//this function assumes userAlgo
           function (success){
             console.log("Successfully saved user " + user.get("username") + " with algo: "+ userAlgo.get("name"));
             if(req.session.user.algos){
+              console.log(req.session.user);
               req.session.user.algos.push({name: data.name});
             }
             else{
