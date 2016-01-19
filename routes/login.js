@@ -219,19 +219,21 @@ router.post('/', function (req, res) {
             res.locals.user  = user;
 
             //add demo algos to account
-            var DemoAlgo      = Parse.Object.extend("DemoAlgo");
-            var demoQuery     = new Parse.Query(DemoAlgo);
-            var relation     = user.relation("algos");
-            demoQuery.find().then(
+            //var DemoAlgo      = Parse.Object.extend("DemoAlgo");
+            var Algo          = Parse.Object.extend("Algo");
+            //var demoQuery     = new Parse.Query(DemoAlgo);
+            var algoQuery     = new Parse.Query(Algo);
+            var relation      = user.relation("algos");
+            algoQuery.find("user_id","DEMO").then(
               function (list){
-                list.forEach(function (demoAlgo){
-                  relation.add(demoAlgo);
+                list.forEach(function (algo){
+                  relation.add(algo);
                   user.save().then(
                     function (success){
-                      console.log("save user" + user.get("username") + "with demo algo" + demoAlgo.get("name"));
+                      console.log("save user" + user.get("username") + "with demo algo" + algo.get("name"));
                     },
                     function (error){
-                      console.log("failed to save" + user.get("username") + "with demo algo " + demoAlgo.get("name"));
+                      console.log("failed to save" + user.get("username")+"with demo algo "+algo.get("name"));
                       console.log(error);
                     }
                   );//end user.save().then()
