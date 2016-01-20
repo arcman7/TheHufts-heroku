@@ -255,7 +255,7 @@ router.post('/', function (req, res) {
                 //       resonse = String(response);
                 //       res.send(response);
                 //     }
-          });/*end save function*/
+          }});/*end save function*/
     }//end register-else
   }// end else no key miss-match
 });//end router post anon-function
