@@ -46,7 +46,6 @@ router.post('/', function (req, res, next)
       tempRelation.query().find().then(
         function (list){
           list.every(function (algo){
-
             if(algo.get("name") == data.algoName){
               var accessToken = object.get("accessToken");
               var encryptedAlgo = algo.get("encryptedString");

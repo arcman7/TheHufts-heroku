@@ -142,7 +142,7 @@ router.post('/', function (req, res) {
                             //tempAlgo.set("Parent",object); //object is the returned user object
                             object.save().then(
                               function (sucess){
-                                console.log("save updated  tempAlgo success");
+                                console.log("save updated tempAlgo success");
                               },
                               function (error){
                                 console.log(" line 147 error: " + error.message + " "+error.code);
@@ -218,44 +218,44 @@ router.post('/', function (req, res) {
 
             res.locals.user  = user;
 
-            //add demo algos to account
-            //var DemoAlgo      = Parse.Object.extend("DemoAlgo");
-            var Algo          = Parse.Object.extend("Algo");
-            //var demoQuery     = new Parse.Query(DemoAlgo);
-            var algoQuery     = new Parse.Query(Algo);
-            var relation      = user.relation("algos");
-            algoQuery.find("user_id","DEMO").then(
-              function (list){
-                list.forEach(function (algo){
-                  relation.add(algo);
-                  user.save().then(
-                    function (success){
-                      console.log("save user" + user.get("username") + "with demo algo" + algo.get("name"));
-                    },
-                    function (error){
-                      console.log("failed to save" + user.get("username")+"with demo algo "+algo.get("name"));
-                      console.log(error);
-                    }
-                  );//end user.save().then()
-                });//end forEach
-                //After adding demo algos to new user account send response
-                res.send(response);
-              },//end success
-              function (error){
-                console.log("could not find demo algos");
-                console.log(error);
-              }//end error
-            );//demoQuery.find().then() end
-          },
-          error: function(user, error) {
-            console.log("failed to save " + error.message)
-            status                = false;
-            response[requestType] = status;
-            response              = JSON.stringify(response);
-            resonse = String(response);
-            res.send(response);
-          }
-      });/*end save function*/
+                //       //add demo algos to account
+                //       //var DemoAlgo      = Parse.Object.extend("DemoAlgo");
+                //       var Algo          = Parse.Object.extend("Algo");
+                //       //var demoQuery     = new Parse.Query(DemoAlgo);
+                //       var algoQuery     = new Parse.Query(Algo);
+                //       var relation      = user.relation("algos");
+                //       algoQuery.find("user_id","DEMO").then(
+                //         function (list){
+                //           list.forEach(function (algo){
+                //             relation.add(algo);
+                //             user.save().then(
+                //               function (success){
+                //                 console.log("save user" + user.get("username") + "with demo algo" + algo.get("name"));
+                //               },
+                //               function (error){
+                //                 console.log("failed to save" + user.get("username")+"with demo algo "+algo.get("name"));
+                //                 console.log(error);
+                //               }
+                //             );//end user.save().then()
+                //           });//end forEach
+                //           //After adding demo algos to new user account send response
+                //           res.send(response);
+                //         },//end success
+                //         function (error){
+                //           console.log("could not find demo algos");
+                //           console.log(error);
+                //         }//end error
+                //       );//demoQuery.find().then() end
+                //     },
+                //     error: function(user, error) {
+                //       console.log("failed to save " + error.message)
+                //       status                = false;
+                //       response[requestType] = status;
+                //       response              = JSON.stringify(response);
+                //       resonse = String(response);
+                //       res.send(response);
+                //     }
+          });/*end save function*/
     }//end register-else
   }// end else no key miss-match
 });//end router post anon-function
