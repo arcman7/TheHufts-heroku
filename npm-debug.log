@@ -96,8 +96,8 @@
 67 info package.json uglify-js@2.4.24 license should be a valid SPDX license expression
 68 info package.json better-console@0.2.4 license should be a valid SPDX license expression
 69 info package.json cassandra-driver@2.2.2 No license field.
-70 info package.json express-minify@0.1.6 No license field.
-71 info package.json express-uglify@0.3.1 No license field.
+70 info package.json express-uglify@0.3.1 No license field.
+71 info package.json express-minify@0.1.6 No license field.
 72 info package.json node-parse-api@0.3.8 No license field.
 73 info package.json string_decoder@0.10.31 string_decoder is also the name of a node core module.
 74 info package.json uglifyjs-middleware@1.1.3 No license field.
@@ -157,34 +157,34 @@
 128 verbose targetResolver reading package data from /Users/Art/Desktop/TheHufts-heroku/node_modules/.bin/obfuscator/package.json
 129 verbose targetResolver reading package data from /Users/Art/Desktop/TheHufts-heroku/node_modules/.bin/uglifyjs/package.json
 130 verbose targetResolver reading package data from /Users/Art/Desktop/TheHufts-heroku/node_modules/.bin/yaml2json/package.json
-131 verbose already installed skipping body-parser@~1.13.2 /Users/Art/Desktop/TheHufts-heroku
-132 verbose already installed skipping cookie-parser@~1.3.5 /Users/Art/Desktop/TheHufts-heroku
-133 verbose already installed skipping crypto-js@3.1.5 /Users/Art/Desktop/TheHufts-heroku
-134 verbose already installed skipping debug@~2.2.0 /Users/Art/Desktop/TheHufts-heroku
-135 verbose already installed skipping del@^2.0.2 /Users/Art/Desktop/TheHufts-heroku
-136 verbose already installed skipping dotenv@^1.2.0 /Users/Art/Desktop/TheHufts-heroku
-137 verbose already installed skipping express@~4.13.1 /Users/Art/Desktop/TheHufts-heroku
-138 verbose already installed skipping express-minify@* /Users/Art/Desktop/TheHufts-heroku
-139 verbose already installed skipping express-uglify@* /Users/Art/Desktop/TheHufts-heroku
-140 verbose already installed skipping extend@^3.0.0 /Users/Art/Desktop/TheHufts-heroku
-141 verbose already installed skipping http@0.0.0 /Users/Art/Desktop/TheHufts-heroku
-142 verbose already installed skipping jade@~1.11.0 /Users/Art/Desktop/TheHufts-heroku
-143 verbose already installed skipping map-stream@0.0.6 /Users/Art/Desktop/TheHufts-heroku
-144 verbose already installed skipping mongodb@^2.0.47 /Users/Art/Desktop/TheHufts-heroku
-145 verbose already installed skipping monk@~1.0.1 /Users/Art/Desktop/TheHufts-heroku
-146 verbose already installed skipping morgan@~1.6.1 /Users/Art/Desktop/TheHufts-heroku
-147 verbose already installed skipping needle@^0.11.0 /Users/Art/Desktop/TheHufts-heroku
-148 verbose already installed skipping node-parse-api@~0.3.8 /Users/Art/Desktop/TheHufts-heroku
-149 verbose already installed skipping nodemon@^1.8.0 /Users/Art/Desktop/TheHufts-heroku
-150 verbose already installed skipping parse@1.6.7 /Users/Art/Desktop/TheHufts-heroku
-151 verbose already installed skipping passport-local@~0.1.6 /Users/Art/Desktop/TheHufts-heroku
-152 verbose already installed skipping require-dot-file@^0.4.0 /Users/Art/Desktop/TheHufts-heroku
-153 verbose already installed skipping run-sequence@^1.1.4 /Users/Art/Desktop/TheHufts-heroku
-154 verbose already installed skipping serve-favicon@~2.3.0 /Users/Art/Desktop/TheHufts-heroku
-155 verbose already installed skipping uglify-js@>=2.3 /Users/Art/Desktop/TheHufts-heroku
-156 verbose already installed skipping yamljs@^0.2.4 /Users/Art/Desktop/TheHufts-heroku
-157 verbose already installed skipping better-console@^0.2.4 /Users/Art/Desktop/TheHufts-heroku
-158 verbose already installed skipping client-sessions@^0.7.0 /Users/Art/Desktop/TheHufts-heroku
+131 verbose already installed skipping run-sequence@^1.1.4 /Users/Art/Desktop/TheHufts-heroku
+132 verbose already installed skipping serve-favicon@~2.3.0 /Users/Art/Desktop/TheHufts-heroku
+133 verbose already installed skipping uglify-js@>=2.3 /Users/Art/Desktop/TheHufts-heroku
+134 verbose already installed skipping yamljs@^0.2.4 /Users/Art/Desktop/TheHufts-heroku
+135 verbose already installed skipping better-console@^0.2.4 /Users/Art/Desktop/TheHufts-heroku
+136 verbose already installed skipping body-parser@~1.13.2 /Users/Art/Desktop/TheHufts-heroku
+137 verbose already installed skipping client-sessions@^0.7.0 /Users/Art/Desktop/TheHufts-heroku
+138 verbose already installed skipping cookie-parser@~1.3.5 /Users/Art/Desktop/TheHufts-heroku
+139 verbose already installed skipping crypto-js@3.1.5 /Users/Art/Desktop/TheHufts-heroku
+140 verbose already installed skipping debug@~2.2.0 /Users/Art/Desktop/TheHufts-heroku
+141 verbose already installed skipping del@^2.0.2 /Users/Art/Desktop/TheHufts-heroku
+142 verbose already installed skipping dotenv@^1.2.0 /Users/Art/Desktop/TheHufts-heroku
+143 verbose already installed skipping express@~4.13.1 /Users/Art/Desktop/TheHufts-heroku
+144 verbose already installed skipping express-minify@* /Users/Art/Desktop/TheHufts-heroku
+145 verbose already installed skipping express-uglify@* /Users/Art/Desktop/TheHufts-heroku
+146 verbose already installed skipping extend@^3.0.0 /Users/Art/Desktop/TheHufts-heroku
+147 verbose already installed skipping http@0.0.0 /Users/Art/Desktop/TheHufts-heroku
+148 verbose already installed skipping jade@~1.11.0 /Users/Art/Desktop/TheHufts-heroku
+149 verbose already installed skipping map-stream@0.0.6 /Users/Art/Desktop/TheHufts-heroku
+150 verbose already installed skipping mongodb@^2.0.47 /Users/Art/Desktop/TheHufts-heroku
+151 verbose already installed skipping monk@~1.0.1 /Users/Art/Desktop/TheHufts-heroku
+152 verbose already installed skipping morgan@~1.6.1 /Users/Art/Desktop/TheHufts-heroku
+153 verbose already installed skipping needle@^0.11.0 /Users/Art/Desktop/TheHufts-heroku
+154 verbose already installed skipping node-parse-api@~0.3.8 /Users/Art/Desktop/TheHufts-heroku
+155 verbose already installed skipping nodemon@^1.8.0 /Users/Art/Desktop/TheHufts-heroku
+156 verbose already installed skipping parse@1.6.7 /Users/Art/Desktop/TheHufts-heroku
+157 verbose already installed skipping passport-local@~0.1.6 /Users/Art/Desktop/TheHufts-heroku
+158 verbose already installed skipping require-dot-file@^0.4.0 /Users/Art/Desktop/TheHufts-heroku
 159 silly install resolved []
 160 info build /Users/Art/Desktop/TheHufts-heroku
 161 info linkStuff nodetest1@0.0.0
