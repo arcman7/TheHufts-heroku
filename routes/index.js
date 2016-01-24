@@ -26,4 +26,7 @@ router.get('/subscription', function(req, res, next) {
   res.render('subscription', { title: 'TheHufts', user: req.session.user });
 });
 
+router.get('/demo', function(req, res, next) {
+  res.render('demo', { title: 'TheHufts', user: req.session.user });
+});
 module.exports = router;
