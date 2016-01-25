@@ -77,9 +77,9 @@ function getDemoAlgoCode(req, res, next, object){
         if(algo.get("name") == req.body.algoName){
           var accessToken = object.get("accessToken");
           var algoFile = algo.get("encryptedString");
-          console.log(algoFile);
+          console.log(JSON.stringify(algoFile));
           //encrypt file for browser
-          console.log("accessToken: ",accessToken);
+          //console.log("accessToken: ",accessToken);
           var browserEncryptedAlgo = aesEncrypt(algoFile,accessToken);
           //console.log("browserEncryptedAlgo: ",browserEncryptedAlgo);
           //good to go

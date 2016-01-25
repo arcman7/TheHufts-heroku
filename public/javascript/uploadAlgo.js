@@ -188,13 +188,13 @@ function inspectSourceCode(algoId){
         $('#code1').text(text);
         $('.codemirror').remove();
           //update codemirror pad
-        var newCodeMirror = CodeMirror.fromTextArea(document.getElementById('code1'), {
+        newCodeMirror = CodeMirror.fromTextArea(document.getElementById('code1'), {
             mode: "javascript",
             theme: "default",
             lineNumbers: true,
             readOnly: true
         });  //end codemirror
-        newCodeMirror.setSize(800, 900);
+        newCodeMirror.setSize(1600, 900);
       });//end done function
 
     request.fail(function (error){
@@ -274,7 +274,7 @@ function algoTesterListener(algoId){
     console.log('worked');
     var username = String(window.location).split('=')[1];
     var demo = $(this).attr("class").split("Demo")[1];
-
+    console.log("goblaSymbol: ",globalSymbol);
     if(globalSymbol){
       //new Promise(resolve,reject){
         var endDate = yahooDateString();
@@ -450,7 +450,6 @@ function applyCash(options){
   if(options.transactionFee){
     fee = options.transactionFee;
   }
-
   //3 arrays for tracking netCash,netValue, shares
   var historicalValues = {};
   historicalValues.netCash  = [];

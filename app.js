@@ -43,7 +43,6 @@ var http = require('http');
 
 //routes
 var index         = require('./routes/index');
-var users         = require('./routes/users');
 var gateKeeper    = require('./routes/gateKeeper');
 var obuscateJS    = require('./routes/obuscateJS');
 var login         = require('./routes/login');
@@ -126,7 +125,6 @@ app.use('/browserClientSetup.js',obuscateJS('/browserClientSetup.js'));
 app.use('/gateKeeper',   gateKeeper);
 app.use('/login',        login);
 app.use('/logout',       logout);
-app.use('/users',        users);
 app.use('/checkLogin',   checkLogin);
 app.use('/saveAlgo',     saveAlgo);
 app.use('/getAlgoNames', getAlgoNames);
