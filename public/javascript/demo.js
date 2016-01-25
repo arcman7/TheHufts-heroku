@@ -5,6 +5,16 @@ $(document).ready(function(){/* activate sidebar */
         top: 235
       }
     });
+    $('.nav li a').click(function(e) {
+
+        $('.nav li').removeClass('active');
+
+        var $parent = $(this).parent();
+        if (!$parent.hasClass('active')) {
+            $parent.addClass('active');
+        }
+        e.preventDefault();
+    });
     var editor_one = CodeMirror.fromTextArea(document.getElementById("demo"), {
       lineNumbers: true,
       matchBrackets: true,
@@ -22,6 +32,7 @@ $body.scrollspy({
   offset: navHeight
 });
 
+
 /* smooth scrolling sections */
 $('a[href*=#]:not([href=#])').click(function() {
     if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
@@ -29,7 +40,7 @@ $('a[href*=#]:not([href=#])').click(function() {
       target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
       if (target.length) {
         $('html,body').animate({
-          scrollTop: target.offset().top - 50
+          scrollTop: target.offset().top
         }, 1000);
         return false;
       }
