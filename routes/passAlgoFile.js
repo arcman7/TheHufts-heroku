@@ -95,8 +95,7 @@ function getDemoAlgoCode(req, res, next, object){
     function (error){
       console.log("passAlgoFile line 58, error:");
       console.log(error);
-      res.send("could not find users algos");
-      //tempRelation query error
+      res.send("could not find demo algos");
     }//end list error
   )//end tempRelation.query().then()
 }

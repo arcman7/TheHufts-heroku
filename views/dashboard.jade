@@ -184,13 +184,13 @@ html
                           a(href='graph_flot.html')  Check the stock price!
     ul.nav.nav-tabs
       li.active
-        a(href='#code1' id="javascript-lang") Javascript
+        a(data-toggle='tab', href='#code1', class="javascript-lang") Javascript
       li
-        a(href='#code1' id="cplusplus-lang") C++
+        a(data-toggle='tab', href='#code2', class="cplusplus-lang") C++
       li
-        a(href='#code1' id="ruby-lang") Ruby
+        a(data-toggle='tab', href='#code3', class="ruby-lang") Ruby
       li
-        a(href='#code1' id="python-lang") Python
+        a(data-toggle='tab', href='#code4', class="python-lang") Python
     .tab-content
       #javascript-lang.tab-pane.fade.in.active
         textarea#code1

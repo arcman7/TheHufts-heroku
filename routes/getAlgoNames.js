@@ -114,27 +114,46 @@ function roughSizeOfObject( object ) {
     return recurse( object );
 }
 
+function getDemoAlgoNames(req, res, next,response){
+  var DemoAlgo  = Parse.Object.extend("DemoAlgo");
+  var demoQuery = new Parse.Query(DemoAlgo);
+  return demoQuery.find().then(
+    function (list){
+      console.log("getDemoAlgoNames: ",list);
+      list.forEach(function (algo){
+          response.algos.push( { name: algo.get("name"), demo: true, fileType: algo.get("fileType") });
+      });//end forEach
+      console.log('sending response')
+      response = JSON.stringify(response);
+      res.send(response);
+    },//end list success
+    function (error){
+      console.log("getAlgoNames getDemoAlgoNames error:");
+      console.log(error);
+      res.send("could not find demo algos");
+    }//end list error
+  )//end tempRelation.query().then()
+}
+
 router.post('/', function (req, res, next) {
   console.log("getAlgoNames req.session.user: ",req.session.user)
   var response = {};
   response["algos"] = [];
   if(req.session.user){
-    // if user is logged in
-    var list = req.session.user.algos;
-    if (list){
-      response["algos"] = list;
-    }
-    else{//user has no uploaded algos
-      response["algos"].push({name: "psychicDemo", demo: true});
-    }
-
-    response = JSON.stringify(response);
+     // if user is logged in
+     var list = req.session.user.algos;
+     if (list){
+       response["algos"] = list;
+       response = JSON.stringify(response);
+       res.send(response);
+     }
+     else{//user has no uploaded algos
+       getDemoAlgoNames(req, res, next, response);
+     }
   }
-  else{
-    response["algos"].push({name: "psychicDemo", demo: true});
-    response = JSON.stringify(response);
+  else{//not logged in?
+    getDemoAlgoNames(req, res, next, response);
   }
-  res.send(response);
 });
 
 module.exports = router;

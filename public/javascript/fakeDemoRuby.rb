@@ -24,7 +24,6 @@ def basicTest(array)
   buy.each do |buySignal|
     buyIndex = buySignal[2];
     boughtPrice = buySignal[1];
-    sellTime;
     array.each_with_index do |day,index|
       price    = array[i][1];
       sellTime = array[i][0];
