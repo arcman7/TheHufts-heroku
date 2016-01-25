@@ -67,70 +67,64 @@ html
           // end navigation
         // menu wrapper
     // end header
-    #wrapper
-      ul.sidebar-nav.clearfix
-        li
-          a.active(href='#') Open a new File
-        li
-          a(href='#') Declare a Function
-        li
-          a(href='#') Take an array as an argument
-        li
-          a(href='#') Loop through the array
-        li
-          a(href='#') Return an object that has two keys
-        // end sidebar
-    // /#wrapper
-        //- .row
-        //-     #leftCol.col-md-3
-        //-       ul#sidebar.nav.nav-stacked.clearfix
-        //-         li
-        //-           a.active(href='#') Open a new File
-        //-         li
-        //-           a(href='#') Declare a Function
-        //-         li
-        //-           a(href='#') Take an array as an argument
-        //-         li
-        //-           a(href='#') Loop through the array
-        //-         li
-        //-           a(href='#') Return an object that has two keys
-        //-         // end sidebar
-
-
-    textarea#demo
-      script.
-        // Code goes here
-        // For demo purpose - animation css script
-        function animationHover(element, animation){
-          element = $(element);
-          element.hover(
-          function() {
-          element.addClass('animated ' + animation);
-          },
-          function(){
-            //wait for animation to finish before removing classes
-            window.setTimeout( function(){
-              element.removeClass('animated ' + animation);
-            }, 2000);
-          });
-        }
-    textarea#demo
-      script.
-        // Code goes here
-        // For demo purpose - animation css script
-        function animationHover(element, animation){
-          element = $(element);
-          element.hover(
-          function() {
-          element.addClass('animated ' + animation);
-          },
-          function(){
-            //wait for animation to finish before removing classes
-            window.setTimeout( function(){
-              element.removeClass('animated ' + animation);
-            }, 2000);
-          });
-        }
+    .container
+      .row
+        //- left nav
+        #leftCol.col-md-3
+          ul#sidebar.nav.nav-stacked
+            li
+              a.active(href='#intro') Intro
+            li
+              a(href='#openFile') Open a new File
+            li
+              a(href='#') Declare a Function
+            li
+              a(href='#') Take an array as an argument
+            li
+              a(href='#') Loop through the array
+            li
+              a(href='#') Return an object that has two keys
+            // end ul
+            //- end left nav
+            //- right
+        .col-md-9
+          h1#intro Intro
+          h5 Hey there! You’re looking at the docs! Let’s dive in.
+          h1#openFile
+          textarea#demo
+            script.
+              // Code goes here
+              // For demo purpose - animation css script
+              function animationHover(element, animation){
+                element = $(element);
+                element.hover(
+                function() {
+                element.addClass('animated ' + animation);
+                },
+                function(){
+                  //wait for animation to finish before removing classes
+                  window.setTimeout( function(){
+                    element.removeClass('animated ' + animation);
+                  }, 2000);
+                });
+              }
+          textarea#demo
+            script.
+              // Code goes here
+              // For demo purpose - animation css script
+              function animationHover(element, animation){
+                element = $(element);
+                element.hover(
+                function() {
+                element.addClass('animated ' + animation);
+                },
+                function(){
+                  //wait for animation to finish before removing classes
+                  window.setTimeout( function(){
+                    element.removeClass('animated ' + animation);
+                  }, 2000);
+                });
+              }
     // Art's scripts
     // jQuery
     script(src='creativ/default/js/jquery.js')
@@ -140,6 +134,7 @@ html
     // Mainly scripts
     script(src='admin/plugins/metisMenu/jquery.metisMenu.js')
     script(src='admin/plugins/slimscroll/jquery.slimscroll.min.js')
+    script(type='text/javascript', src='/javascript/demo.js')
     // Custom and plugin javascript
     script(src='admin/inspinia.js')
     script(src='admin/plugins/filestyle/src/bootstrap-filestyle.min.js')
@@ -147,11 +142,6 @@ html
     // CodeMirror
     script(src='admin/plugins/codemirror/codemirror.js')
     script(src='admin/plugins/codemirror/mode/javascript/javascript.js')
-    script.
-      $(document).ready(function(){
-
-
-      });
     //if lt IE 10
       script(src='assets/js/placeholder.js')
     // initialize globoal js variables
