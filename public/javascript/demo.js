@@ -1,49 +1,37 @@
 
-$(document).ready(function(){/* activate sidebar */
-    $('#sidebar').affix({
-      offset: {
-        top: 235
-      }
-    });
-    $('.nav li a').click(function(e) {
+$(document).ready(function(){
+  /* activate sidebar */
+  $('#sidebar').affix({
+    offset: {
+      top: 235
+    }
+  });
 
-        $('.nav li').removeClass('active');
+  /* activate scrollspy menu */
+  var $body   = $(document.body);
 
-        var $parent = $(this).parent();
-        if (!$parent.hasClass('active')) {
-            $parent.addClass('active');
+  $body.scrollspy({
+    target: '#leftCol',
+    offset: 100
+  });
+
+  /* smooth scrolling sections */
+  $('a[href*=#]:not([href=#])').click(function() {
+      if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+        var target = $(this.hash);
+        target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+        if (target.length) {
+          $('html,body').animate({
+            scrollTop: target.offset().top - 50
+          }, 1000);
+          return false;
         }
-        e.preventDefault();
-    });
-    var editor_one = CodeMirror.fromTextArea(document.getElementById("demo"), {
+      }
+  });
+  var editor_one = CodeMirror.fromTextArea(document.getElementById("demo"), {
       lineNumbers: true,
       matchBrackets: true,
       styleActiveLine: true,
       theme:"neo"
     });
 });
-
-/* activate scrollspy menu */
-var $body   = $(document.body);
-var navHeight = $('.navbar').outerHeight(true) + 10;
-
-$body.scrollspy({
-  target: '#leftCol',
-  offset: navHeight
-});
-
-
-/* smooth scrolling sections */
-$('a[href*=#]:not([href=#])').click(function() {
-    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
-      var target = $(this.hash);
-      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
-      if (target.length) {
-        $('html,body').animate({
-          scrollTop: target.offset().top
-        }, 1000);
-        return false;
-      }
-    }
-});
-

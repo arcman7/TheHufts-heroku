@@ -13,17 +13,11 @@ html
     link(href='stylesheets/demo.css', rel='stylesheet')
     // Plugins CSS
     link(href='admin/plugins/codemirror/codemirror.css', rel='stylesheet')
-    link(href='admin/plugins/codemirror/neo.css', rel='stylesheet')
     // Custom Fonts
     link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,500')
     link(href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600,400italic,600italic,700,700italic,900', rel='stylesheet', type='text/css')
     link(href='https://fonts.googleapis.com/css?family=Montserrat:400,700', rel='stylesheet', type='text/css')
   body
-    style.
-      textarea {
-      color: pink;
-      caret-color: red;
-      }
     #loader
       .loader-container
         #preloader_1
@@ -38,8 +32,6 @@ html
           nav#navigation.navbar.yamm(role='navigation')
             .navbar-inner
               .navbar-header
-                a#brand.clearfix.navbar-brand(href='/landingPage')
-                  img(src='', alt='TheHufts', data-selector='img')
                 a#brand.clearfix.navbar-brand(href='/landingPage')
                   img(src='imgs/thehuftsbrain.png', alt='TheHufts', style='width:7%;height:7%', data-selector='img')
               // end navbar-header
@@ -68,6 +60,7 @@ html
         // menu wrapper
     // end header
     .container
+      h1(style="font-size: 100px; margin:0 0 0 auto; height: 15%") Welcome to the docs
       .row
         //- left nav
         #leftCol.col-md-3
@@ -127,11 +120,7 @@ html
     // Mainly scripts
     script(src='admin/plugins/metisMenu/jquery.metisMenu.js')
     script(src='admin/plugins/slimscroll/jquery.slimscroll.min.js')
-    script(type='text/javascript', src='/javascript/demo.js')
     // Custom and plugin javascript
-    script(src='admin/inspinia.js')
-    script(src='admin/plugins/filestyle/src/bootstrap-filestyle.min.js')
-    script(src='admin/plugins/sweetalert/sweetalert.min.js', type='text/javascript')
     // CodeMirror
     script(src='admin/plugins/codemirror/codemirror.js')
     script(src='admin/plugins/codemirror/mode/javascript/javascript.js')
@@ -139,16 +128,5 @@ html
       script(src='assets/js/placeholder.js')
     // initialize globoal js variables
     script(type='text/javascript', src='/javascript/globalVariables.js')
-    // Graph's scripts
-    script(src='https://code.highcharts.com/stock/highstock.js')
-    script(src='https://code.highcharts.com/stock/highcharts-more.js')
-    script(src='https://code.highcharts.com/stock/modules/exporting.js')
-    script(type='text/javascript', src='/javascript/query.js')
-    // CodeMirror
-    script(src='admin/plugins/codemirror/codemirror.js')
-    script(src='admin/plugins/codemirror/mode/javascript/javascript.js')
-    // Login scripts
-    script(src='https://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/aes.js')
-    script(src='https://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha3.js')
-    script(type='text/javascript', src='/uploadAlgo.js')
-    script(type='text/javascript', src='/logoutFront.js')
+    script(type='text/javascript', src='/javascript/demo.js')
+
