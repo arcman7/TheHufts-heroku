@@ -9,9 +9,9 @@ html
     link(href='creativ/default/css/bootstrap.min.css', rel='stylesheet')
     link(href='creativ/default/css/font-awesome.css', rel='stylesheet')
     link(href='stylesheets/animate.css', rel='stylesheet')
-    link(href='stylesheets/dashboard.css', rel='stylesheet')
+    link(href='stylesheets/default-style.css', rel='stylesheet')
+    link(href='stylesheets/demo.css', rel='stylesheet')
     // Plugins CSS
-    link(href='admin/plugins/sweetalert/sweetalert.css', rel='stylesheet')
     link(href='admin/plugins/codemirror/codemirror.css', rel='stylesheet')
     link(href='admin/plugins/codemirror/neo.css', rel='stylesheet')
     // Custom Fonts
@@ -81,7 +81,39 @@ html
           a(href='#') Return an object that has two keys
         // end sidebar
     // /#wrapper
+        //- .row
+        //-     #leftCol.col-md-3
+        //-       ul#sidebar.nav.nav-stacked.clearfix
+        //-         li
+        //-           a.active(href='#') Open a new File
+        //-         li
+        //-           a(href='#') Declare a Function
+        //-         li
+        //-           a(href='#') Take an array as an argument
+        //-         li
+        //-           a(href='#') Loop through the array
+        //-         li
+        //-           a(href='#') Return an object that has two keys
+        //-         // end sidebar
 
+
+    textarea#demo
+      script.
+        // Code goes here
+        // For demo purpose - animation css script
+        function animationHover(element, animation){
+          element = $(element);
+          element.hover(
+          function() {
+          element.addClass('animated ' + animation);
+          },
+          function(){
+            //wait for animation to finish before removing classes
+            window.setTimeout( function(){
+              element.removeClass('animated ' + animation);
+            }, 2000);
+          });
+        }
     textarea#demo
       script.
         // Code goes here
@@ -117,12 +149,8 @@ html
     script(src='admin/plugins/codemirror/mode/javascript/javascript.js')
     script.
       $(document).ready(function(){
-      var editor_one = CodeMirror.fromTextArea(document.getElementById("demo"), {
-        lineNumbers: true,
-        matchBrackets: true,
-        styleActiveLine: true,
-        theme:"neo"
-        });
+
+
       });
     //if lt IE 10
       script(src='assets/js/placeholder.js')
