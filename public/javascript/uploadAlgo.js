@@ -166,18 +166,19 @@ function uploadFileListener(){
 
 function inspectSourceCode(algoId){
     $("#uploaded-algos-container").on('click','#'+algoId,function (e){
-    e.preventDefault();
-    var url = protocol + "//" + domain + "/passAlgoFile";
-    var username = String(window.location).split('=')[1];
-    var algoName = algoId.split("TheHufts")[0];
-    console.log(algoName);
-    var demo = $(this).attr("class").split("Demo")[1];
-    var data = { username: username, algoName: algoName, demo: demo};
-    var request = $.ajax({
-      url: url,
-      type: "post",
-      data: data
-    });
+      //e.preventDefault();
+      console.log(algoName);
+      var url = protocol + "//" + domain + "/passAlgoFile";
+      var username = String(window.location).split('=')[1];
+      var algoName = algoId.split("TheHufts")[0];
+      console.log(algoName);
+      var demo = $(this).attr("class").split("Demo")[1];
+      var data = { username: username, algoName: algoName, demo: demo};
+      var request = $.ajax({
+        url: url,
+        type: "post",
+        data: data
+      });
 
     request.done(function (response){
       console.log('done');
@@ -225,6 +226,7 @@ function getUsersAlgoNames (){
        $("#uploaded-algos-container").append('<tr class="'+filename+'"><td><button id="'+filename+'TheHufts" class="Demo'+demo+'"><i class="fa fa-eye"></i></button></td><td><strong style="color:#1ab394">'+filename+'</strong></td><td></td><td>$ <input type="integer" name="principal" class="'+filename+'" value="100.00"></td><td><a id="'+filename+'" class="Demo'+demo+'"><i class="fa fa-line-chart text-navy">Run</i></td><td><a class="killRow"><i class="fa fa-times"></i></div></a></td></tr>');
        $("table.table.table-striped td").css({'padding-left':'0px'});
        $("table.table.table-striped td").css({'padding-right':'0px'});
+        console.log(filename+'TheHufts');
         algoTesterListener('#'+filename);
         inspectSourceCode(filename+'TheHufts');
        });
