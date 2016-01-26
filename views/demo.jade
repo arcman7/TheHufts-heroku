@@ -1,132 +1,129 @@
-html
-  head
-    meta(charset='utf-8')
-    title TheHufts
-    meta(name='description', content='test page')
-    meta(name='viewport', content='width=device-width')
-    // Art's
-    // Bootstrap Core CSS
-    link(href='creativ/default/css/bootstrap.min.css', rel='stylesheet')
-    link(href='creativ/default/css/font-awesome.css', rel='stylesheet')
-    link(href='stylesheets/animate.css', rel='stylesheet')
-    link(href='stylesheets/default-style.css', rel='stylesheet')
-    link(href='stylesheets/demo.css', rel='stylesheet')
-    // Plugins CSS
-    link(href='admin/plugins/codemirror/codemirror.css', rel='stylesheet')
-    // Custom Fonts
-    script(src='creativ/default/js/jquery.js')
-    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,500')
-    link(href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600,400italic,600italic,700,700italic,900', rel='stylesheet', type='text/css')
-    link(href='https://fonts.googleapis.com/css?family=Montserrat:400,700', rel='stylesheet', type='text/css')
-    script(type='text/javascript', src='/javascript/demo.js')
-  body
-    #loader
-      .loader-container
-        #preloader_1
-          span
-          span
-          span
-          span
-          span
-    header#header-one.dark-header.header
-      .container-fluid
-        .menu-wrapper
-          nav#navigation.navbar.yamm(role='navigation')
-            .navbar-inner
-              .navbar-header
-                a#brand.clearfix.navbar-brand(href='/landingPage')
-                  img(src='imgs/thehuftsbrain.png', alt='TheHufts', style='width:7%;height:7%', data-selector='img')
-              // end navbar-header
-              #navbar-collapse.navbar-right.navbar-collapse.collapse.clearfix
-                ul.nav.navbar-nav
-                  li.wps-half
-                    a(href='/landingPage') Home
-                  // end mega menu
-                  if !user
-                    li.wps-full
-                      a#logIn(href='/logIn') Log In
-                    li.wps-full
-                      a#signUp(href='/register') Sign Up
-                  else
-                    li.wps-full
-                      a#signOut(href='/logout') Sign Out
-                  // end navbar-right
-                .pull-right.clearfix
-                  .right-menu
-                    span
-                  // end custom-menu
-                // end widget
-              // end navbar-callopse
-            // end navbar-inner
-          // end navigation
-        // menu wrapper
-    // end header
-    .container
-      h1(style="font-size: 100px; margin:0 0 0 auto; height: 15%") Welcome to the docs
-      .row
-        //- left nav
-        #leftCol.col-md-3
-          ul#sidebar.nav.nav-stacked
-            li
-              a(href='#intro') Intro
-            li
-              a(href='#openFile') Open a new File
-            li
-              a(href='#decFunc') Declare a Function
-            li
-              a(href='#arrayArg') Take an array as an argument
-            li
-              a(href='#loopArr') Loop through the array
-            li
-              a(href='#twoKeys') Return an object that has two keys
-            // end ul
-            //- end left nav
-            //- right
-        .col-md-9
-          h1#intro Intro
-          h5 Hey there! You’re looking at the docs! Let’s dive in.
-          div(style="height:40%")
-          h1#openFile Open a new File!
-          div(style="height:40%")
-          h1#decFunc Declare a Function!
-          textarea#demo
-            script.
-              // Code goes here
-              // For demo purpose - animation css script
-              function animationHover(element, animation){
-                element = $(element);
-                element.hover(
-                function() {
-                element.addClass('animated ' + animation);
-                },
-                function(){
-                  //wait for animation to finish before removing classes
-                  window.setTimeout( function(){
-                    element.removeClass('animated ' + animation);
-                  }, 2000);
-                });
-              }
-          div(style="height:40%")
-          h1#arrayArg Take an array as an Argument!
-          div(style="height:40%")
-          h1#loopArr Loop through the array
-          div(style="height:40%")
-          h1#twoKeys Return an object that has two keys
-          div(style="height:40%")
-      // Art's scripts
-      // jQuery
-    script(src='creativ/default/js/bootstrap.min.js')
-    script(src='creativ/default/js/retina.js')
-    script(src='creativ/default/js/home-scripts.js')
-    // Mainly scripts
-    script(src='admin/plugins/metisMenu/jquery.metisMenu.js')
-    script(src='admin/plugins/slimscroll/jquery.slimscroll.min.js')
-    // Custom and plugin javascript
-    // CodeMirror
-    script(src='admin/plugins/codemirror/codemirror.js')
-    script(src='admin/plugins/codemirror/mode/javascript/javascript.js')
-    //if lt IE 10
-      script(src='assets/js/placeholder.js')
-    // initialize globoal js variables
-    script(type='text/javascript', src='/javascript/globalVariables.js')
-
+doctype html
+html.
+  <html>
+    <head>
+      <meta charset="utf-8"/>
+      <title>TheHufts</title>
+      <meta name="description" content="test page"/>
+      <meta name="viewport" content="width=device-width"/>
+      <!-- Art's-->
+      <!-- Bootstrap Core CSS-->
+      <link href="creativ/default/css/bootstrap.min.css" rel="stylesheet"/>
+      <link href="creativ/default/css/font-awesome.css" rel="stylesheet"/>
+      <link href="stylesheets/animate.css" rel="stylesheet"/>
+      <link href="stylesheets/default-style.css" rel="stylesheet"/>
+      <link href="stylesheets/demo.css" rel="stylesheet"/>
+      <!-- Plugins CSS-->
+      <link href="admin/plugins/codemirror/codemirror.css" rel="stylesheet"/>
+      <!-- Custom Fonts-->
+      <script src="creativ/default/js/jquery.js"></script>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,100,300,500"/>
+      <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600,400italic,600italic,700,700italic,900" rel="stylesheet" type="text/css"/>
+      <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css"/>
+      <script type="text/javascript" src="/javascript/demo.js"></script>
+    </head>
+    <body>
+      <div id="loader">
+        <div class="loader-container">
+          <div id="preloader_1"><span></span><span></span><span></span><span></span><span></span></div>
+        </div>
+      </div>
+      <header id="header-one" class="dark-header header">
+        <div class="container-fluid">
+          <div class="menu-wrapper">
+            <nav id="navigation" role="navigation" class="navbar yamm">
+              <div class="navbar-inner">
+                <div class="navbar-header"><a id="brand" href="/landingPage" class="clearfix navbar-brand"><img src="imgs/thehuftsbrain.png" alt="TheHufts" style="width:7%;height:7%" data-selector="img"/></a></div>
+                <!-- end navbar-header-->
+                <div id="navbar-collapse" class="navbar-right navbar-collapse collapse clearfix">
+                  <ul class="nav navbar-nav">
+                    <li class="wps-half"><a href="/landingPage">Home</a></li>
+                    <!-- end mega menu-->
+                    <li class="wps-full"><a id="logIn" href="/logIn">Log In</a></li>
+                    <li class="wps-full"><a id="signUp" href="/register">Sign Up</a></li>
+                    <!-- end navbar-right-->
+                  </ul>
+                  <div class="pull-right clearfix">
+                    <div class="right-menu"><span></span></div>
+                    <!-- end custom-menu-->
+                  </div>
+                  <!-- end widget-->
+                </div>
+                <!-- end navbar-callopse-->
+              </div>
+              <!-- end navbar-inner-->
+            </nav>
+            <!-- end navigation-->
+          </div>
+          <!-- menu wrapper-->
+        </div>
+      </header>
+      <!-- end header-->
+      <div class="container">
+        <h1 style="font-size: 100px; margin:0 0 0 auto; height: 15%">Welcome to the docs</h1>
+        <div class="row">
+          <div id="leftCol" class="col-md-3">
+            <ul id="sidebar" class="nav nav-stacked">
+              <li><a href="#intro">Intro</a></li>
+              <li><a href="#openFile">Open a new File</a></li>
+              <li><a href="#decFunc">Declare a Function</a></li>
+              <li><a href="#arrayArg">Take an array as an argument</a></li>
+              <li><a href="#loopArr">Loop through the array</a></li>
+              <li><a href="#twoKeys">Return an object that has two keys</a></li>
+              <!-- end ul-->
+            </ul>
+          </div>
+          <div class="col-md-9">
+            <h1 id="intro">Intro</h1>
+            <h5>Hey there! You’re looking at the docs! Let’s dive in.</h5>
+            <div style="height:40%"></div>
+            <h1 id="openFile">Open a new File!</h1>
+            <div style="height:40%"></div>
+            <h1 id="decFunc">Declare a Function!</h1>
+            <textarea id="demo">
+              <script>
+                // Code goes here
+                // For demo purpose - animation css script
+                function animationHover(element, animation){
+                  element = $(element);
+                  element.hover(
+                  function() {
+                  element.addClass('animated ' + animation);
+                  },
+                  function(){
+                    //wait for animation to finish before removing classes
+                    window.setTimeout( function(){
+                      element.removeClass('animated ' + animation);
+                    }, 2000);
+                  });
+                }
+              </script>
+            </textarea>
+            <div style="height:40%"></div>
+            <h1 id="arrayArg">Take an array as an Argument!</h1>
+            <div style="height:40%"></div>
+            <h1 id="loopArr">Loop through the array</h1>
+            <div style="height:40%"></div>
+            <h1 id="twoKeys">Return an object that has two keys</h1>
+            <div style="height:40%"></div>
+          </div>
+        </div>
+        <!-- Art's scripts-->
+        <!-- jQuery-->
+      </div>
+      <script src="creativ/default/js/bootstrap.min.js"></script>
+      <script src="creativ/default/js/retina.js"></script>
+      <script src="creativ/default/js/home-scripts.js"></script>
+      <!-- Mainly scripts-->
+      <script src="admin/plugins/metisMenu/jquery.metisMenu.js"></script>
+      <script src="admin/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+      <!-- Custom and plugin javascript-->
+      <!-- CodeMirror-->
+      <script src="admin/plugins/codemirror/codemirror.js"></script>
+      <script src="admin/plugins/codemirror/mode/javascript/javascript.js"></script>
+      <!--if lt IE 10script(src='assets/js/placeholder.js')
+      -->
+      <!-- initialize globoal js variables-->
+      <script type="text/javascript" src="/javascript/globalVariables.js"></script>
+    </body>
+  </html>
