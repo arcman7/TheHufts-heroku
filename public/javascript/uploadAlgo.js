@@ -1,3 +1,4 @@
+//this file depends on crypto js being loaded first
 function encrypt(string,key){
   var encrypted = CryptoJS.AES.encrypt(string,key).toString();
   return encrypted;
@@ -7,7 +8,6 @@ function decrypt(string,key){
   var decrypted = CryptoJS.AES.decrypt(string, key);
   return decrypted.toString(CryptoJS.enc.Utf8);
 }
-
 
 var yousuck = " Please refresh the page and try again.";
 var userAlgoFunctions = {};
@@ -85,7 +85,40 @@ function checkLogin(){
     });
 }
 
+function saveAlgo(data,filename){
+  var request = $.ajax({
+      url: protocol + "//" + domain+"/saveAlgo",
+      type:"post",
+      data: {data: data}
+  });
 
+  request.done(function (response){
+    console.log(response);
+    var demo = false;
+    $("#uploaded-algos-container").append('<tr class="'+filename+'"><td><button id="'+filename+'TheHufts" class="Demo'+demo+'"><i class="fa fa-eye"></i></button></td><td><strong style="color:#1ab394">'+filename+'</strong></td><td></td><td>$ <input type="integer" name="principal" class="'+filename+'" value="100.00"></td><td><a id="'+filename+'" class="Demo'+demo+'"><i class="fa fa-line-chart text-navy">Run</i></td><td><a class="killRow"><i class="fa fa-times"></i></div></a></td></tr>');
+    $("table.table.table-striped td").css({'padding-left':'0px'});
+    $("table.table.table-striped td").css({'padding-right':'0px'});
+    // $("#uploaded-algos-container").append('<tr class="'+filename+'"><td>'+filename+' </td><td>$</td><td><input type="integer" name="principal" class="'+filename+'" value="100.00"></td><td></td><td><a id="'+filename+'"><i class="fa fa-line-chart text-navy"> Run</i></a></td><td><a class="killRow"><i class="fa fa-times"></i></a></td></tr>');
+    algoTesterListener('#'+filename);
+    inspectSourceCode(filename+"TheHufts");
+  });//end done function
+}
+
+function queryGateKeeper(data,callback,filename){
+  data = JSON.stringify(data);
+  var gateKeeperURL = protocol + "//" + domain + "/gateKeeper/knockKnock";
+
+  $.ajax({
+          url: gateKeeperURL,
+          type: "get"
+  }).
+  done(function(response){
+    var key = response;
+    data = encrypt(data, key);
+    var confirmation = encrypt("TheHufts",key);
+    callback(data,filename);
+  });
+}
 
 
 function uploadFileListener(){
@@ -114,24 +147,12 @@ function uploadFileListener(){
         // var fileType =  file.name.split('.').pop();
         var filename = file.name.split('.')[0];
         var password = prompt("Password confirmation: ", "password");
-        //console.log(password);
-        //console.log(algoScript);
+
         var encryptedAlgoString = encrypt(algoScript,password);
         //userAlgoFunctions[filename] = encryptedAlgoString;
-        var data = {algo: encryptedAlgoString, name: filename, fileType: fileType, password: password};
+        var data = {algo: encryptedAlgoString, name: filename, fileType: fileType, password: password, confirmation: "TheHufts"};
+        queryGateKeeper(data,saveAlgo,filename);
         //console.log(fileType)
-        var request = $.ajax({
-          url: protocol + "//" + domain+"/saveAlgo",
-          type:"post",
-          data: data
-        });
-        request.done(function(response){
-          console.log(response);
-          var filename = file.name.split('.')[0]
-          $("#uploaded-algos-container").append('<tr class="'+filename+'"><td><button><i class="fa fa-eye"></i></button></td><td><strong style="color:#1ab394">'+filename+'</strong></td><td></td><td>$ <input type="integer" name="principal" class="'+filename+'" value="100.00"></td><td></td><td></td><td><a class="killRow"><div style="position: absolute;top: 45%; right: 10%;"><i class="fa fa-times"></i></div></a></td></tr>');
-          algoTesterListener('#'+filename);
-
-        });//end done function
 
         }//end if results[0]
       else{
@@ -141,33 +162,74 @@ function uploadFileListener(){
     };
     reader.readAsText(file);
 
-    // var filename = file.name.split('.')[0]
-    // $("#uploaded-algos-container").append('<tr><td> '+ filename +' </td><td></td><td><a id="'+ filename +'"><i class="fa fa-line-chart text-navy"> Run</i></a></td><td><a class="killRow"><i class="fa fa-times"></i></a></td></tr>');
-    // //$("#uploaded-algos-container").append(html_string);
-    // algoTesterListener('#'+filename);
   };//end .onchange function
 }
 
+function inspectSourceCode(algoId){
+    $("#uploaded-algos-container").on('click','#'+algoId,function (e){
+      //e.preventDefault();
+      console.log(algoName);
+      var url = protocol + "//" + domain + "/passAlgoFile";
+      var username = String(window.location).split('=')[1];
+      var algoName = algoId.split("TheHufts")[0];
+      console.log(algoName);
+      var demo = $(this).attr("class").split("Demo")[1];
+      var data = { username: username, algoName: algoName, demo: demo};
+      var request = $.ajax({
+        url: url,
+        type: "post",
+        data: data
+      });
+
+    request.done(function (response){
+      console.log('done');
+        response = JSON.parse(response);
+        var fileType = response.fileType;
+        var text = decrypt(response.algoFile, window.access_key);
+          //set text-area for code pad to be generated from
+        $('#code1').text(text);
+        $('.codemirror').remove();
+          //update codemirror pad
+        newCodeMirror = CodeMirror.fromTextArea(document.getElementById('code1'), {
+            mode: "javascript",
+            theme: "default",
+            lineNumbers: true,
+            readOnly: true
+        });  //end codemirror
+        newCodeMirror.setSize(1600, 900);
+      });//end done function
+
+    request.fail(function (error){
+      console.log(error);
+    })
+  });//end on click
+}
 
 
 function getUsersAlgoNames (){
   //var accessKey = prompt("Please confirm with your access key: ", "access-key");
-  var accessKey = "huffer";
   var username = String(window.location).split('=')[1];
 
   $.ajax({
     url: protocol + "//" + domain + "/getAlgoNames",
     type: "post",
-    data: {username: username, accessKey: accessKey}
+    data: {username: username}
   })
   .done(function(response){
     //console.log(response,typeof(response));
     response = JSON.parse(response);
     console.log(response);
-    if(response.names){
-       response.names.forEach(function (algoName){
-        $("#uploaded-algos-container").append('<tr class="'+algoName+'"><td>'+ algoName+' </td><td>$</td><td><input type="integer" name="principal" class="'+algoName+'" value="100.00"></td><td></td><td><a id="'+algoName+'"><i class="fa fa-line-chart text-navy"> Run</i></a></td><td><a class="killRow"><i class="fa fa-times"></i></a></td></tr>');
-        algoTesterListener('#'+algoName);
+    if(response.algos){
+       response.algos.forEach(function (algo){
+        var filename = algo.name;
+        var demo = (algo.demo ? "true" : "false");
+
+       $("#uploaded-algos-container").append('<tr class="'+filename+'"><td><button id="'+filename+'TheHufts" class="Demo'+demo+'"><i class="fa fa-eye"></i></button></td><td><strong style="color:#1ab394">'+filename+'</strong></td><td></td><td>$ <input type="integer" name="principal" class="'+filename+'" value="100.00"></td><td><a id="'+filename+'" class="Demo'+demo+'"><i class="fa fa-line-chart text-navy">Run</i></td><td><a class="killRow"><i class="fa fa-times"></i></div></a></td></tr>');
+       $("table.table.table-striped td").css({'padding-left':'0px'});
+       $("table.table.table-striped td").css({'padding-right':'0px'});
+        console.log(filename+'TheHufts');
+        algoTesterListener('#'+filename);
+        inspectSourceCode(filename+'TheHufts');
        });
     }
 
@@ -214,7 +276,8 @@ function algoTesterListener(algoId){
     e.preventDefault();
     console.log('worked');
     var username = String(window.location).split('=')[1];
-
+    var demo = $(this).attr("class").split("Demo")[1];
+    console.log("goblaSymbol: ",globalSymbol);
     if(globalSymbol){
       //new Promise(resolve,reject){
         var endDate = yahooDateString();
@@ -222,8 +285,8 @@ function algoTesterListener(algoId){
         var d300ago = new Date(d - 300*3600*1000*24);
         var startDate = yahooDateString(d300ago);
         var filename = algoId.slice(1);
-        var data = {username: username, filename: filename, accessKey: "huffer", "symbols": JSON.stringify([ globalSymbol] ), startDate: startDate, endDate: endDate, domain: domain, protocol: protocol};
-        console.log(data);
+        var data = {username: username, filename: filename, accessKey: "huffer", "symbols": JSON.stringify([ globalSymbol] ), startDate: startDate, endDate: endDate, domain: domain, protocol: protocol, demo: demo};
+        //console.log(data);
         $(algoId).html('<i class="fa fa-cog fa-spin"></i>');
         var request = $.ajax({
               url: protocol + "//" + domain + "/hufterAPI",
@@ -248,7 +311,7 @@ function algoTesterListener(algoId){
                 }
                console.log(options.signals);
                results = applyCash(options);
-               //console.log(results);
+               console.log(results)
                graphHome(results.netValue, $(".results"),"Day ", undefined,globalSymbol);
                pluginAlgoResults(results);
                $(".results").css("padding","1px");
@@ -257,10 +320,6 @@ function algoTesterListener(algoId){
             });
         //resolve(request)
       //}).then(function(response))
-
-      //clearing mysterious 'A' text value from markers
-      // $("#highcharts-6 > svg > g.highcharts-series-group > g > g > text").text('');
-      //edit: The 'A' still fucking comes back anytime you adjust the graph!?
     }
     else{
       swal("Wait!", "Shouldn't you search a stock first so your algorithm will run against something?", "error");
@@ -394,7 +453,6 @@ function applyCash(options){
   if(options.transactionFee){
     fee = options.transactionFee;
   }
-
   //3 arrays for tracking netCash,netValue, shares
   var historicalValues = {};
   historicalValues.netCash  = [];

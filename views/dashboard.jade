@@ -2,7 +2,7 @@ html
   head
     meta(charset='utf-8')
     title TheHufts
-    meta(name='description', content='test page')
+    meta(name='description', content='Dashboard')
     meta(name='viewport', content='width=device-width')
     // Art's
     // Bootstrap Core CSS
@@ -181,23 +181,24 @@ html
                         br
                         small.m-r
                           a(href='graph_flot.html')  Check the stock price!
-    textarea#code1
-      script.
-        // Code goes here
-        // For demo purpose - animation css script
-        function animationHover(element, animation){
-        element = $(element);
-        element.hover(
-        function() {
-        element.addClass('animated ' + animation);
-        },
-        function(){
-        //wait for animation to finish before removing classes
-        window.setTimeout( function(){
-        element.removeClass('animated ' + animation);
-        }, 2000);
-        });
-        }
+    ul.nav.nav-tabs
+      li.active
+        a(data-toggle='tab', href='#code1', class="javascript-lang") Javascript
+      li
+        a(data-toggle='tab', href='#code2', class="cplusplus-lang") C++
+      li
+        a(data-toggle='tab', href='#code3', class="ruby-lang") Ruby
+      li
+        a(data-toggle='tab', href='#code4', class="python-lang") Python
+    .tab-content
+      #javascript-lang.tab-pane.fade.in.active
+        textarea#code1
+      #cplusplus-lang.tab-pane.fade
+        textarea#code2
+      #ruby-lang.tab-pane.fade
+        textarea#code3
+      #python-lang.tab-pane.fade
+        textarea#code4
     // Art's scripts
     // jQuery
     script(src='creativ/default/js/jquery.js')
@@ -211,18 +212,15 @@ html
     script(src='admin/inspinia.js')
     script(src='admin/plugins/filestyle/src/bootstrap-filestyle.min.js')
     script(src='admin/plugins/sweetalert/sweetalert.min.js', type='text/javascript')
-    // CodeMirror
-    script(src='admin/plugins/codemirror/codemirror.js')
-    script(src='admin/plugins/codemirror/mode/javascript/javascript.js')
     script.
-      $(document).ready(function(){
-      var editor_one = CodeMirror.fromTextArea(document.getElementById("code1"), {
-      lineNumbers: true,
-      matchBrackets: true,
-      styleActiveLine: true,
-      theme:"neo"
-      });
-      });
+      //- $(document).ready(function(){
+      //- var editor_one = CodeMirror.fromTextArea(document.getElementById("code1"), {
+      //- lineNumbers: true,
+      //- matchBrackets: true,
+      //- styleActiveLine: true,
+      //- theme:"neo"
+      //- });
+      //- });
     //if lt IE 10
       script(src='assets/js/placeholder.js')
     // initialize globoal js variables
@@ -235,8 +233,13 @@ html
     // CodeMirror
     script(src='admin/plugins/codemirror/codemirror.js')
     script(src='admin/plugins/codemirror/mode/javascript/javascript.js')
+    script(src='admin/plugins/codemirror/mode/ruby/ruby.js')
+    script(src='admin/plugins/codemirror/mode/python/python.js')
+    script(src='admin/plugins/codemirror/mode/clike/clike.js' data-mime-type="text/x-c++src")
+
     // Login scripts
     script(src='https://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/aes.js')
     script(src='https://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha3.js')
     script(type='text/javascript', src='/uploadAlgo.js')
     script(type='text/javascript', src='/logoutFront.js')
+    script(type='text/javascript', src='/browserClientSetup.js')

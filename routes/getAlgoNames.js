@@ -21,61 +21,61 @@ function aesEncrypt(string,key){
   return encryptedString;
 }
 
-function getUserAlgo(username,req,res,next){
-   //console.log("resetSessionAlgos req.body: " + JSON.stringify(req.body));
-   var requestType = "getAlgoFiles";
-   var User  = Parse.Object.extend("UserC");
-   var query = new Parse.Query(User);
-    query.equalTo( "username", username )//.select(userAttributes);
-    query.first().then(
-      function (object) {
-        console.log("LOGIN: Successfully retrieved user" + object.get("username"));
-        var accessToken = object.get('accessToken');
-        /////////////////////////////////////////////////////
-        //setting the session to the logged in user
-        var user         = {};
-        user.accessToken = accessToken;
-        user.username    = object.get('username');
-        var session_id   = aesEncrypt(user.username, "TheHufts");
+// function getUserAlgo(username,req,res,next){
+//    //console.log("resetSessionAlgos req.body: " + JSON.stringify(req.body));
+//    var requestType = "getAlgoFiles";
+//    var User  = Parse.Object.extend("UserC");
+//    var query = new Parse.Query(User);
+//     query.equalTo( "username", username )//.select(userAttributes);
+//     query.first().then(
+//       function (object) {
+//         console.log("LOGIN: Successfully retrieved user" + object.get("username"));
+//         var accessToken = object.get('accessToken');
+//         /////////////////////////////////////////////////////
+//         //setting the session to the logged in user
+//         var user         = {};
+//         user.accessToken = accessToken;
+//         user.username    = object.get('username');
+//         var session_id   = aesEncrypt(user.username, "TheHufts");
 
-        user.email       = object.get('email');
-        var relation     = object.relation("algos");
-        relation.query().find().then(
-            function (list){
-              if (list.length == 0){  //the user has no uploaded algos
-                user.algos = false;
-              }
-              else{ //storing users algos in user object
-                list = list.map(function(algo){
-                  var encryptedAlgo = algo.get("encryptedString");
-                  var algoFile      = aesDcrypt(encryptedAlgo,req.body.accessKey);
-                  //return {algo: algoFile, name: algo.get("name") }
-                  return {name: algo.get("name")}
-                });
-                user.algos = list;
-              }
-              req.user = user;
-              req.session.user = user;  //refresh the session value
-              req.session.user.session_id = session_id;
+//         user.email       = object.get('email');
+//         var relation     = object.relation("algos");
+//         relation.query().find().then(
+//             function (list){
+//               if (list.length == 0){  //the user has no uploaded algos
+//                 user.algos = false;
+//               }
+//               else{ //storing users algos in user object
+//                 list = list.map(function(algo){
+//                   var encryptedAlgo = algo.get("encryptedString");
+//                   var algoFile      = aesDcrypt(encryptedAlgo,req.body.accessKey);
+//                   //return {algo: algoFile, name: algo.get("name") }
+//                   return {name: algo.get("name")}
+//                 });
+//                 user.algos = list;
+//               }
+//               req.user = user;
+//               req.session.user = user;  //refresh the session value
+//               req.session.user.session_id = session_id;
 
-              res.locals.user  = user;
-               console.log("req.session resetSessionAlgos: ", JSON.stringify(req.session));
-               console.log("req.session size: "+ roughSizeOfObject(req.session));
-               next();
-              // console.log("req.cookies: resetSessionAlgos: ", req.cookies);
-            },
-            function (error){
-              console.log( "users-algos error: "+error);
-              next();
-            }
-          );//end relation-then function
-      },//end query user success function
-      function (error) {
-        console.log(" (line 205 app.js) LOGIN-Error: " + error.code + " " + error.message);
-        next();
-      }
-    ); //end query-first user
-}
+//               res.locals.user  = user;
+//                console.log("req.session resetSessionAlgos: ", JSON.stringify(req.session));
+//                console.log("req.session size: "+ roughSizeOfObject(req.session));
+//                next();
+//               // console.log("req.cookies: resetSessionAlgos: ", req.cookies);
+//             },
+//             function (error){
+//               console.log( "users-algos error: "+error);
+//               next();
+//             }
+//           );//end relation-then function
+//       },//end query user success function
+//       function (error) {
+//         console.log(" (line 205 app.js) LOGIN-Error: " + error.code + " " + error.message);
+//         next();
+//       }
+//     ); //end query-first user
+// }
 
 function roughSizeOfObject( object ) {
 
@@ -114,34 +114,46 @@ function roughSizeOfObject( object ) {
     return recurse( object );
 }
 
+function getDemoAlgoNames(req, res, next,response){
+  var DemoAlgo  = Parse.Object.extend("DemoAlgo");
+  var demoQuery = new Parse.Query(DemoAlgo);
+  return demoQuery.find().then(
+    function (list){
+      console.log("getDemoAlgoNames: ",list);
+      list.forEach(function (algo){
+          response.algos.push( { name: algo.get("name"), demo: true, fileType: algo.get("fileType") });
+      });//end forEach
+      console.log('sending response')
+      response = JSON.stringify(response);
+      res.send(response);
+    },//end list success
+    function (error){
+      console.log("getAlgoNames getDemoAlgoNames error:");
+      console.log(error);
+      res.send("could not find demo algos");
+    }//end list error
+  )//end tempRelation.query().then()
+}
+
 router.post('/', function (req, res, next) {
-  //has the effect of setting the session again, including assignment of the users algorithms
-  //console.log("getAlgoNames req.body:" + JSON.stringify(req.body));
-      // new Promise(function(resolve, reject){
-      //   resetSessionAlgos(req.body.username,req,res)
-      //   resolve(reset);
-      // })
-      // .then(function(){
+  console.log("getAlgoNames req.session.user: ",req.session.user)
   var response = {};
-  response["names"] = [];
-  console.log("req.session: " + JSON.stringify(req.session));
+  response["algos"] = [];
   if(req.session.user){
-    // if user is logged in
-    var list = req.session.user.algos;
-    if (!list){  //the user has no uploaded algos
-      response["names"] = false;
-    }
-    else{
-      list.forEach(function(algo){
-         response["names"].push(algo.name);
-      });
-    }
-    response = JSON.stringify(response);
+     // if user is logged in
+     var list = req.session.user.algos;
+     if (list){
+       response["algos"] = list;
+       response = JSON.stringify(response);
+       res.send(response);
+     }
+     else{//user has no uploaded algos
+       getDemoAlgoNames(req, res, next, response);
+     }
   }
-  else{
-    response["names"] = false;
+  else{//not logged in?
+    getDemoAlgoNames(req, res, next, response);
   }
-  res.send(response);
 });
 
 module.exports = router;

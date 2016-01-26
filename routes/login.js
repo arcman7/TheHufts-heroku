@@ -46,7 +46,7 @@ function queryParseUser(options,req,res,next) {
       success: function(object) {
         console.log("queryParseUser: Successfully retrieved " + object.get("username"));
         //console.log(object.get('pwd'));
-        var user         ={};
+        var user         = {};
         user.email       = object.get('email');
         user.username    = object.get('username');
         user.accessToken = object.get('accessToken');
@@ -56,10 +56,8 @@ function queryParseUser(options,req,res,next) {
 
         var session_id = aesEncrypt(user.username, "TheHufts");
         req.session.user.session_id = session_id;
-
         res.locals.user  = user;
-        //console.log("req.session: ", JSON.stringify(req.session));
-        //console.log("req.cookies: ", JSON.stringify(req.cookies));
+
         // finish processing the middleware and run the route
         next();
       },
@@ -70,6 +68,54 @@ function queryParseUser(options,req,res,next) {
       }
     }); //end query.first function call
 }//end queryParseUser
+
+function getDemoAlgoNames(nameList,user,parseUser,data,req,res){
+ var DemoAlgo  = Parse.Object.extend("DemoAlgo");
+ var demoQuery = new Parse.Query(DemoAlgo);
+ demoQuery.find().then(
+  function (list){
+    list.forEach(function (algo){
+      nameList.push({ name: algo.get("name"), demo: true });
+    });//end forEach
+    user.algos = nameList;
+    req.user = user;
+    req.session.user = user;  //refresh the session value
+    res.locals.user  = user;
+    var session_id = aesEncrypt(user.username, "TheHufts");
+    req.session.user.session_id = session_id;
+    var response          = {};
+    response["redirect"]  = data.protocol+"//"+data.domain+"/dashboard"+ "?username="+session_id;
+    var requestType       = ( data.login ? "login" : "register" );
+    response[requestType] = true;
+    //response["accessToken"] = aesEncrypt(parseUser.get('accessToken'),key);
+    response = JSON.stringify(response);
+    res.send(response)
+   },
+   function (error){
+    console.log("could not find demo algos");
+    console.log(error);
+    }//end error
+ );//end then
+}
+
+function curriedCreateTempAlgo(password,parseUser,tempAlgoArray){
+  return function createTempAlgo(algo){
+            var TempAlgo = Parse.Object.extend("TempAlgo");
+            var encryptedAlgo = algo.get("encryptedString");
+            var algoFile      = aesDecrypt(encryptedAlgo,password);
+            var temp          = new TempAlgo();
+            temp.set("user_id",parseUser.id);
+            temp.set("name", algo.get("name"));
+            //console.log(algoFile);
+            //accessToken to decrypt algorithms = sha3(username) -> sha3 a one way hashing algo
+            var key = sha3(parseUser.get("username")+"TheHufts");
+            temp.set("encryptedString", aesEncrypt(algoFile, key) );
+            temp.set("fileType",algo.get("fileType"));
+            tempAlgoArray.push(temp); //expects tempAlgoArray to already exsist in scope level where the function is evoked
+            return { name: algo.get("name") };
+        }
+}
+
 
 
 router.post('/', function (req, res) {
@@ -92,7 +138,6 @@ router.post('/', function (req, res) {
     var response = {};
 
     if(data.login){ //code to log a user in
-      requestType = "login";
       var TempAlgo = Parse.Object.extend("TempAlgo");
       var User     = Parse.Object.extend("UserC");
       var query    = new Parse.Query(User);
@@ -113,36 +158,31 @@ router.post('/', function (req, res) {
               var relation      = object.relation("algos");
               var tempRelation  = object.relation("tempAlgos");
               var tempAlgoArray = [];//used to save temp algos
+              var nameList      = [];
               relation.query().find().then(
                   function (list){
+                    console.log("login list: ",list);
                     if (list.length == 0){  //the user has no uploaded algos
-                      user.algos = false;
+                      getDemoAlgoNames(nameList,user,object,data,req,res);
                     }
                     else{ //storing users algos in user object
-                      nameList = list.map(function (algo){
-                        var encryptedAlgo = algo.get("encryptedString");
-                        var algoFile      = aesDecrypt(encryptedAlgo,data.password);
-                        var temp          = new TempAlgo();
-                        temp.set("user_id",object.id);
-                        temp.set("name", algo.get("name"));
-                        //accessToken to decrypt algorithms = sha3(username) -> sha3 a one way hashing algo
-                        var key = sha3(user.username+"TheHufts");
-                        temp.set("encryptedString", aesEncrypt(algoFile, key) );
-                        temp.set("fileType",algo.get("fileType"));
-                        tempAlgoArray.push(temp);
-                        return { name: algo.get("name") }
-                      });
-                      user.algos = nameList;
+                      var createTempAlgoLocked = curriedCreateTempAlgo(data.password,object,tempAlgoArray);
+                      nameList = list.map( createTempAlgoLocked );
+                      //nameList,user,parseUser,data,req,res
+                      getDemoAlgoNames(nameList,user,object,data,req,res);
+                      console.log("LOGIN nameList: ",nameList);
+                      console.log("LOGIN user.algos: ", user.algos)
+                      //user.algos = nameList; this is done inside of getDemoAlgoNames now
                       Parse.Object.saveAll(tempAlgoArray).then(
                         //after saving tempAlgos update their relationships with user
                         function (success){
                           tempAlgoArray.forEach(function (tempAlgo){
                             console.log("saved raw tempAlgo obeject with no relationships");
-                            tempRelation.add(tempAlgo)
+                            tempRelation.add(tempAlgo);
                             //tempAlgo.set("Parent",object); //object is the returned user object
                             object.save().then(
                               function (sucess){
-                                console.log("save updated  tempAlgo success");
+                                console.log("save updated tempAlgo success");
                               },
                               function (error){
                                 console.log(" line 147 error: " + error.message + " "+error.code);
@@ -154,17 +194,8 @@ router.post('/', function (req, res) {
                           console.log("line 152 error: " + error.message + " "+error.code)
                         }
                       );
-                    }
-                    req.user = user;
-                    req.session.user = user;  //refresh the session value
-                    res.locals.user  = user;
-                    var session_id = aesEncrypt(user.username, "TheHufts");
-                    req.session.user.session_id = session_id;
-                    response["redirect"]    = data.protocol+"//"+data.domain+"/dashboard"+ "?username="+session_id;
-                    response[requestType]   = status;
-                    response["accessToken"] = aesEncrypt(object.get('accessToken'),key);
-                    response = JSON.stringify(response);
-                    res.send(response)
+                    }//end else
+
                   },
                   function (error){
                     console.log( "users-algos error: "+error);
@@ -179,6 +210,7 @@ router.post('/', function (req, res) {
               res.send(response);
             }
          },//end query user success function
+
          function (error) {
             console.log(" (line 133 login.js) LOGIN-Error: " + error.code + " " + error.message);
             status                = false;
@@ -190,35 +222,25 @@ router.post('/', function (req, res) {
      else{ //code to register a user
         requestType  = "register";
         var User     = Parse.Object.extend("UserC");
-        var user     = new User();
+        var parseUser     = new User();
+        var user          = {};
         console.log("register data :"+JSON.stringify(data));
         var password = data.password;
-        user.set("username", data.username);
+        parseUser.set("username", data.username);
         var session_id = aesEncrypt(user.username, "TheHufts");
-        user.set("email", data.email);
-        //using pwd as alias for password
-        user.set("accessToken","TheHufts");
-        user.set("pwd",password);
-        user.save(null, {
-          success: function(user) {
+        var nameList      = [];
+
+        parseUser.set("email", data.email);
+        parseUser.set("accessToken","TheHufts");
+        parseUser.set("pwd",password);
+        parseUser.set("demo",true);
+        user.accessToken  = parseUser.get("accessToken");
+        user.username     = parseUser.get('username');
+        user.email        = parseUser.get('email');
+        parseUser.save(null, {
+          success: function(object) {
             console.log(" user successfully saved");
-            var session_id = aesEncrypt(user.get("username"), "TheHufts");
-            status                = true;
-            response[requestType] = status;
-            response["redirect"]    = data.protocol+"//"+data.domain+"/dashboard"+ "?username="+session_id;
-            response              = JSON.stringify(response);
-
-            user.email       = user.get('email');
-            user.username    = user.get('username');
-            user.accessToken = user.get('accessToken');
-
-            req.user         = user;
-            req.session.user = user;  //refresh the session value
-            req.session.user.session_id = session_id;
-
-            res.locals.user  = user;
-          // finishing processing the middleware and run the route
-            res.send(response);
+            getDemoAlgoNames(nameList,user,object,data,req,res);
           },
           error: function(user, error) {
             console.log("failed to save " + error.message)
