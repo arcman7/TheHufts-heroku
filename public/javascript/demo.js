@@ -34,4 +34,19 @@ $(document).ready(function(){
       styleActiveLine: true,
       theme:"neo"
     });
+
+  var editor_two = CodeMirror.fromTextArea(document.getElementById("demo2"), {
+      lineNumbers: true,
+      matchBrackets: true,
+      styleActiveLine: true,
+      theme:"neo"
+    });
 });
+var e_one = CodeMirror.fromTextArea(document.getElementById("demo"));
+var e_two = CodeMirror.fromTextArea(document.getElementById("demo2"));
+
+  function onChange(){
+      // if $(this).val() == '1'{
+       e_two.value = e_one.getValue();
+     // }
+  };

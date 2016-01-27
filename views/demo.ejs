@@ -19,7 +19,6 @@
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,100,300,500"/>
       <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600,400italic,600italic,700,700italic,900" rel="stylesheet" type="text/css"/>
       <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css"/>
-      <script type="text/javascript" src="/javascript/demo.js"></script>
     </head>
     <body>
       <div id="loader">
@@ -36,12 +35,12 @@
               <!-- end navbar-header-->
               <div id="navbar-collapse" class="navbar-right navbar-collapse collapse clearfix">
                 <ul class="nav navbar-nav">
-                  <li class="wps-half"><a href="/landingPage">Home</a></li>
                   <!-- end mega menu-->
                   <%if(!user){%>
                     <li class="wps-full"><a id="logIn" href="/logIn">Log In</a></li>
                     <li class="wps-full"><a id="signUp" href="/register">Sign Up</a></li>
                   <%}else{%>
+                  <li class="wps-half"><a href="/dashboard">Dashboard</a></li>
                     <li class="wps-full"><a href="#">Documentation</a>
                     <li class="wps-full"><a id="signOut" href="/logout">Sign Out</a></li>
                   <%}%>
@@ -103,6 +102,17 @@
                 }
               </script>
             </textarea>
+            <select name="idLanguage" id="select" onChange="onChange()">
+              <option value="1">JavaScript</option>
+              <option value="2">C++</option>
+              <option value="3">Ruby</option>
+              <option value="4">Python</option>
+            </select>
+            <textarea id="demo2">
+              <script>
+                demooooooooooo
+              </script>
+            </textarea>
             <div style="height:40%"></div>
             <h1 id="arrayArg">Take an array as an Argument!</h1>
             <div style="height:40%"></div>
@@ -129,5 +139,6 @@
       -->
       <!-- initialize globoal js variables-->
       <script type="text/javascript" src="/javascript/globalVariables.js"></script>
+      <script type="text/javascript" src="/javascript/demo.js"></script>
     </body>
 </html>
