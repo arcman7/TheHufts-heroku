@@ -1,6 +1,5 @@
-doctype html
-html.
-  <html>
+<!DOCTYPE html>
+<html>
     <head>
       <meta charset="utf-8"/>
       <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -38,36 +37,41 @@ html.
         </div>
       </div>
       <header id="header-one" class="dark-header header">
-        <div class="container-fluid">
-          <div class="menu-wrapper">
-            <nav id="navigation" role="navigation" class="navbar yamm">
-              <div class="navbar-inner">
-                <div class="navbar-header"><a id="brand" href="/landingPage" class="clearfix navbar-brand"><img src="imgs/thehuftsbrain.png" alt="TheHufts" style="height:0;width:7%;height:7%" data-selector="img"/><img src="" alt="TheHufts" data-selector="img"/></a></div>
-                <!-- end navbar-header-->
-                <div class="navbar-right">
-                  <ul class="nav navbar-nav">
-                    <li class="wps-half"><a href="/landingPage">Home</a></li>
-                    <!-- end mega menu-->
-                    <li class="wps-full"><a href="/logIn">Log In</a></li>
-                    <li class="wps-full"><a href="/register">Sign Up</a></li>
-                    <!-- end navbar-right-->
-                  </ul>
-                  <div class="pull-right clearfix">
-                    <div class="right-menu"><span></span></div>
-                    <!-- end custom-menu-->
-                  </div>
-                  <!-- end widget-->
+      <div class="container-fluid">
+        <div class="menu-wrapper">
+          <nav id="navigation" role="navigation" class="navbar yamm">
+            <div class="navbar-inner">
+              <div class="navbar-header"><a id="brand" href="/landingPage" class="clearfix navbar-brand"><img src="imgs/thehuftsbrain.png" alt="TheHufts" style="height:0;width:7%;height:7%" data-selector="img"/><img src="" alt="TheHufts" data-selector="img"/></a></div>
+              <!-- end navbar-header-->
+              <div id="navbar-collapse" class="navbar-right navbar-collapse collapse clearfix">
+                <ul class="nav navbar-nav">
+                  <!-- end mega menu-->
+                  <%if(!user){%>
+                    <li class="wps-full"><a id="logIn" href="/logIn">Log In</a></li>
+                    <li class="wps-full"><a id="signUp" href="/register">Sign Up</a></li>
+                  <%}else{%>
+                  <li class="wps-half"><a href="/dashboard">Dashboard</a></li>
+                    <li class="wps-full"><a href="/demo">Documentation</a>
+                    <li class="wps-full"><a id="signOut" href="/logout">Sign Out</a></li>
+                  <%}%>
+                  <!-- end navbar-right-->
+                </ul>
+                <div class="pull-right clearfix">
+                  <div class="right-menu"><span></span></div>
+                  <!-- end custom-menu-->
                 </div>
-                <!-- end navbar-right-->
+                <!-- end widget-->
               </div>
-              <!-- end navbar-inner-->
-            </nav>
-            <!-- end navigation-->
-          </div>
-          <!-- menu wrapper-->
+              <!-- end navbar-callopse-->
+            </div>
+            <!-- end navbar-inner-->
+          </nav>
+          <!-- end navigation-->
         </div>
-      </header>
-      <!-- end header-->
+        <!-- menu wrapper-->
+      </div>
+    </header>
+    <!-- end header-->
       <section style="background-image: url('http://www.todayonline.com/sites/default/files/styles/photo_gallery_image_lightbox/public/16780028.JPG?itok=uHIy2m0P');" data-stellar-background-ratio="0.6" data-stellar-vertical-offset="0" class="meta-wrapper section-parallax">
         <div id="page_header">
           <div class="container text-left"><br/>
