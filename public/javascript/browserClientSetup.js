@@ -106,7 +106,6 @@ function yahooJson2HighchartsDATA(arrayOfJson){
 }
 
 function initializeStockGraph(){
-  console.log('one');
   queryYahooAPI('P', yahooJson2HighchartsDATA,$(".graph"));
   globalSymbol = 'P';
       $(".graph").html("");

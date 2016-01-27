@@ -14,6 +14,7 @@
     "debug": "~2.2.0",
     "del": "^2.0.2",
     "dotenv": "^1.2.0",
+    "ejs":"2.4.1",
     "express": "~4.13.1",
     "express-minify": "*",
     "express-uglify": "*",
