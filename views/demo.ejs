@@ -86,24 +86,10 @@
             <div style="height:40%"></div>
             <h1 id="decFunc">Declare a Function!</h1>
             <div id="cmContainer" style="border: 1px solid black;width: 350px;"></div>
-              <input type="button" value="swap to 1" id="swap1" onClick="clickSwap1()"/>
-              <input type="button" value="swap to 2" id="swap2" onClick="clickSwap2()"/>
+              <input type="button" value="Javascript" id="swap1" onClick="swapJS()"/>
+              <input type="button" value="C++" id="swap2" onClick="swapCPlus()"/>
               <script>
-                  var cm = CodeMirror(document.getElementById('cmContainer'), {
-                      'lineNumbers': true
-                  });
 
-                  var doc1 = CodeMirror.Doc(new Array(50).join(new Array(20).join('abc ') + '\n'));
-                  var doc2 = CodeMirror.Doc(new Array(10).join(new Array(3).join('def ') + '\n'));
-                  cm.swapDoc(doc1);
-
-                  function clickSwap1() {
-                      cm.swapDoc(doc1);
-                  }
-
-                  function clickSwap2() {
-                      cm.swapDoc(doc2);
-                  }
               </script>
             <h1 id="arrayArg">Take an array as an argument</h1>
             <h1 id="loopArr">Loop through the array</h1>
@@ -123,10 +109,10 @@
       <!-- CodeMirror-->
       // <script src="admin/plugins/codemirror/codemirror.js"></script>
       <script src="admin/plugins/codemirror/mode/javascript/javascript.js"></script>
+      <script type="text/javascript" src="/javascript/demo.js"></script>
       <!--if lt IE 10script(src='assets/js/placeholder.js')
       -->
       <!-- initialize globoal js variables-->
       <script type="text/javascript" src="/javascript/globalVariables.js"></script>
-      <script type="text/javascript" src="/javascript/demo.js"></script>
     </body>
 </html>
