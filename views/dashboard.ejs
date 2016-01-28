@@ -115,7 +115,7 @@
                 </div>
               </div>
             </div>
-            <div class="row">
+            <!-- <div class="row">
               <div id="return" class="col-md-2"></div>
               <div id="percentage" class="col-md-2"></div>
               <div id="balance" class="col-md-2"></div>
@@ -177,11 +177,22 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> // row-->
           </div>
         </h2>
       </h2>
     </div>
+
+
+    <div class="box-content">
+      <input type="button" class="btn btn-outline btn-info dim" value="Javascript" id="swap1" onClick="swapJS()"/>
+      <input type="button" class="btn btn-outline btn-info dim" value="C++" id="swap2" onClick="swapCPlus()"/>
+      <input type="button" class="btn btn-outline btn-info dim" value="Ruby" id="swap1" onClick="swapRuby()"/>
+      <input type="button" class="btn btn-outline btn-info dim" value="Python" id="swap2" onClick="swapPython()"/>
+    </div>
+    <div id="cmContainer" style="width:50%"></div>
+
+
     <ul class="nav nav-tabs">
       <li class="active"><a data-toggle="tab" href="#code1" class="javascript-lang">Javascript</a></li>
       <li><a data-toggle="tab" href="#code2" class="cplusplus-lang">C++</a></li>
@@ -235,5 +246,6 @@
     <script type="text/javascript" src="/uploadAlgo.js"></script>
     <script type="text/javascript" src="/logoutFront.js"></script>
     <script type="text/javascript" src="/browserClientSetup.js"></script>
+    <script type="text/javascript" src="/javascript/demo.js"></script>
   </body>
 </html>

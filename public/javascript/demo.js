@@ -31,10 +31,13 @@ $(document).ready(function(){
 });
 
 var cm = CodeMirror(document.getElementById('cmContainer'), {
-                    'lineNumbers': true
+          mode: "javascript",
+          theme: "default",
+          lineNumbers: true,
+          readOnly: true
 });
 
-var docJS = CodeMirror.Doc(new Array(50).join(new Array(20).join('JS') + '\n'));
+var docJS = CodeMirror.Doc(new Array(10).join(new Array(20).join('JS') + '\n'));
 var docCPlus = CodeMirror.Doc(new Array(10).join(new Array(3).join('c++ ') + '\n'));
 var docRuby = CodeMirror.Doc(new Array(10).join(new Array(3).join('ruby ') + '\n'));
 var docPython = CodeMirror.Doc(new Array(10).join(new Array(3).join('python ') + '\n'));
