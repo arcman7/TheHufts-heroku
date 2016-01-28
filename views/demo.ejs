@@ -13,9 +13,11 @@
       <link href="stylesheets/default-style.css" rel="stylesheet"/>
       <link href="stylesheets/demo.css" rel="stylesheet"/>
       <!-- Plugins CSS-->
-      <link href="admin/plugins/codemirror/codemirror.css" rel="stylesheet"/>
+      <!-- <link href="admin/plugins/codemirror/codemirror.css" rel="stylesheet"/> -->
       <!-- Custom Fonts-->
       <script src="creativ/default/js/jquery.js"></script>
+      <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.5.0/codemirror.css"/>
+      <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.5.0/codemirror.js"></script>
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,100,300,500"/>
       <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600,400italic,600italic,700,700italic,900" rel="stylesheet" type="text/css"/>
       <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css"/>
@@ -83,43 +85,27 @@
             <h1 id="openFile">Open a new File!</h1>
             <div style="height:40%"></div>
             <h1 id="decFunc">Declare a Function!</h1>
-            <textarea id="demo">
+            <div id="cmContainer" style="border: 1px solid black;width: 350px;"></div>
+              <input type="button" value="swap to 1" id="swap1" onClick="clickSwap1()"/>
+              <input type="button" value="swap to 2" id="swap2" onClick="clickSwap2()"/>
               <script>
-                // Code goes here
-                // For demo purpose - animation css script
-                function animationHover(element, animation){
-                  element = $(element);
-                  element.hover(
-                  function() {
-                  element.addClass('animated ' + animation);
-                  },
-                  function(){
-                    //wait for animation to finish before removing classes
-                    window.setTimeout( function(){
-                      element.removeClass('animated ' + animation);
-                    }, 2000);
+                  var cm = CodeMirror(document.getElementById('cmContainer'), {
+                      'lineNumbers': true
                   });
-                }
+
+                  var doc1 = CodeMirror.Doc(new Array(50).join(new Array(20).join('abc ') + '\n'));
+                  var doc2 = CodeMirror.Doc(new Array(10).join(new Array(3).join('def ') + '\n'));
+                  cm.swapDoc(doc1);
+
+                  function clickSwap1() {
+                      cm.swapDoc(doc1);
+                  }
+
+                  function clickSwap2() {
+                      cm.swapDoc(doc2);
+                  }
               </script>
-            </textarea>
-            <select name="idLanguage" id="select" onChange="onChange()">
-              <option value="1">JavaScript</option>
-              <option value="2">C++</option>
-              <option value="3">Ruby</option>
-              <option value="4">Python</option>
-            </select>
-            <textarea id="demo2">
-              <script>
-                demooooooooooo
-              </script>
-            </textarea>
-            <div style="height:40%"></div>
-            <h1 id="arrayArg">Take an array as an Argument!</h1>
-            <div style="height:40%"></div>
-            <h1 id="loopArr">Loop through the array</h1>
-            <div style="height:40%"></div>
-            <h1 id="twoKeys">Return an object that has two keys</h1>
-            <div style="height:40%"></div>
+
           </div>
         </div>
         <!-- Art's scripts-->
@@ -133,7 +119,7 @@
       <script src="admin/plugins/slimscroll/jquery.slimscroll.min.js"></script>
       <!-- Custom and plugin javascript-->
       <!-- CodeMirror-->
-      <script src="admin/plugins/codemirror/codemirror.js"></script>
+      // <script src="admin/plugins/codemirror/codemirror.js"></script>
       <script src="admin/plugins/codemirror/mode/javascript/javascript.js"></script>
       <!--if lt IE 10script(src='assets/js/placeholder.js')
       -->
