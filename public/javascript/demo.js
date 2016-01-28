@@ -28,19 +28,6 @@ $(document).ready(function(){
         }
       }
   });
-var buffers_top = CodeMirror.fromTextArea(document.getElementById("demo"), {
-      lineNumbers: true,
-      matchBrackets: true,
-      styleActiveLine: true,
-      theme:"neo"
-    });
-
-  var buffers_bot = CodeMirror.fromTextArea(document.getElementById("demo2"), {
-      lineNumbers: true,
-      matchBrackets: true,
-      styleActiveLine: true,
-      theme:"neo"
-    });
 });
 
 // var e_one = CodeMirror.fromTextArea(document.getElementById("demo"));
