@@ -29,34 +29,27 @@ $(document).ready(function(){
       }
   });
 });
-  var cm = CodeMirror(document.getElementById('cmContainer'), {
-                      'lineNumbers': true
-  });
 
-  var docJS = CodeMirror.Doc(new Array(50).join(new Array(20).join('abc ') + '\n'));
-  var docCPlus = CodeMirror.Doc(new Array(10).join(new Array(3).join('def ') + '\n'));
+var cm = CodeMirror(document.getElementById('cmContainer'), {
+                    'lineNumbers': true
+});
 
-  cm.swapDoc(doc1);
+var docJS = CodeMirror.Doc(new Array(50).join(new Array(20).join('abc ') + '\n'));
+var docCPlus = CodeMirror.Doc(new Array(10).join(new Array(3).join('def ') + '\n'));
+var docRuby = CodeMirror.Doc(new Array(10).join(new Array(3).join('def ') + '\n'));
+var docPython = CodeMirror.Doc(new Array(10).join(new Array(3).join('def ') + '\n'));
+cm.swapDoc(docJS);
 
-  function swapJS() {
-      cm.swapDoc(docJS);
-  };
+function swapJS() {
+    cm.swapDoc(docJS);
+};
 
-  function swapCPlus() {
-      cm.swapDoc(docCPlus);
-  };
-  function swapRuby() {
-      cm.swapDoc(docRuby);
-  };
-  function swapPython() {
-      cm.swapDoc(docPython);
-  };
-
-// var e_one = CodeMirror.fromTextArea(document.getElementById("demo"));
-// var e_two = CodeMirror.fromTextArea(document.getElementById("demo2"));
-
-//   function onChange(){
-//       // if $(this).val() == '1'{
-//        e_two.value = e_one.getValue();
-//      // }
-//   };
+function swapCPlus() {
+    cm.swapDoc(docCPlus);
+};
+function swapRuby() {
+    cm.swapDoc(docRuby);
+};
+function swapPython() {
+    cm.swapDoc(docPython);
+};
