@@ -30,26 +30,42 @@ $(document).ready(function(){
   });
 });
 
-var cm = CodeMirror(document.getElementById('cmContainer'), {
-                    'lineNumbers': true
-});
+var cm = CodeMirror(document.getElementById('cmContainer'),
+        {
+            mode: "javascript",
+            theme: "default",
+            lineNumbers: true,
+            readOnly: false
+        });
 
 var docJS = CodeMirror.Doc(new Array(50).join(new Array(20).join('JS') + '\n'));
 var docCPlus = CodeMirror.Doc(new Array(10).join(new Array(3).join('c++ ') + '\n'));
 var docRuby = CodeMirror.Doc(new Array(10).join(new Array(3).join('ruby ') + '\n'));
 var docPython = CodeMirror.Doc(new Array(10).join(new Array(3).join('python ') + '\n'));
 cm.swapDoc(docJS);
+// cm.setOption('mode','javascript');
 
 function swapJS() {
-    cm.swapDoc(docJS);
+  cm.swapDoc(docJS);
+  cm.setOption('mode','javascript');
+  console.log("mode set to js")
 };
 
 function swapCPlus() {
-    cm.swapDoc(docCPlus);
+  cm.swapDoc(docCPlus);
+  cm.setOption('mode','clike');
+  console.log("mode set to c++")
+
 };
 function swapRuby() {
-    cm.swapDoc(docRuby);
+  cm.swapDoc(docRuby);
+  cm.setOption('mode','ruby');
+  console.log("mode set to ruby")
+
 };
 function swapPython() {
-    cm.swapDoc(docPython);
+  cm.swapDoc(docPython);
+  cm.setOption('mode','python');
+  console.log("mode set to python")
+
 };
