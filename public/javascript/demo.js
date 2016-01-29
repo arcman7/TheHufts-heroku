@@ -42,17 +42,22 @@ var docCPlus = CodeMirror.Doc(new Array(10).join(new Array(3).join('c++ ') + '\n
 var docRuby = CodeMirror.Doc(new Array(10).join(new Array(3).join('ruby ') + '\n'));
 var docPython = CodeMirror.Doc(new Array(10).join(new Array(3).join('python ') + '\n'));
 cm.swapDoc(docJS);
+cm.setOption('mode', 'javascript');
 
 function swapJS() {
     cm.swapDoc(docJS);
+    cm.setOption('mode', 'javascript');
 };
 
 function swapCPlus() {
     cm.swapDoc(docCPlus);
+    cm.setOption('mode', 'clike');
 };
 function swapRuby() {
     cm.swapDoc(docRuby);
+    cm.setOption('mode', 'ruby');
 };
 function swapPython() {
     cm.swapDoc(docPython);
+    cm.setOption('mode', 'python');
 };
