@@ -4,6 +4,11 @@ $(document).on("ready",function(){
     console.log("clicked")
     $('.profit-row').hide();
   })
+  $('.viewSource').on('click', function(){
+        $('html, body').animate({
+          scrollTop: $(".box-content").offset().top
+        }, 1000);
+    });
 });
 
 var cm = CodeMirror(document.getElementById('cmContainer'), {
