@@ -580,7 +580,7 @@ body.canvas-menu.mini-navbar nav.navbar-static-side {
   color: #1c84c6;
 }
 .btn-info.btn-outline {
-  color: #23c6c8;
+  color: white;
 }
 .btn-warning.btn-outline {
   color: #f8ac59;
@@ -8335,6 +8335,28 @@ a,
   -ms-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
+
+.box-content {
+    color: inherit;
+    padding: 15px 20px 20px 20px;
+    border-color: #e7eaec;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 1px 0;
+}
+
+.btn-info:hover, .btn-info:focus, .btn-info.focus, .btn-info:active, .btn-info.active, .open>.dropdown-toggle.btn-info{
+    color: white;
+    background-color: #0FB594;
+    border-color: #0FB594;
+}
+
+.btn-info {
+    color: #fff;
+    background-color: #18e2ba;
+    border-color: #56FFDD;
+  }
+
 
 
 
