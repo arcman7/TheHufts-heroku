@@ -3,7 +3,7 @@ $(document).on("ready",function(){
     e.preventDefault();
     console.log("clicked")
     $('.profit-row').hide();
-  })
+  });
   $('.viewSource').on('click', function(){
         $('html, body').animate({
           scrollTop: $(".box-content").offset().top
