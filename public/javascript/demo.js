@@ -51,7 +51,7 @@ function swapJS() {
 
 function swapCPlus() {
     cm.swapDoc(docCPlus);
-    cm.setOption('mode', 'clike');
+    cm.setOption('mode', 'text/x-c++src');
 };
 function swapRuby() {
     cm.swapDoc(docRuby);
