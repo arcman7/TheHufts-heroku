@@ -38,34 +38,27 @@ var cm = CodeMirror(document.getElementById('cmContainer'),
             readOnly: false
         });
 
-var docJS = CodeMirror.Doc(new Array(10).join(new Array(20).join('JS') + '\n'));
+var docJS = CodeMirror.Doc(new Array(10).join(new Array(20).join('JS') + '\n'))
 var docCPlus = CodeMirror.Doc(new Array(10).join(new Array(3).join('c++ ') + '\n'));
 var docRuby = CodeMirror.Doc(new Array(10).join(new Array(3).join('ruby ') + '\n'));
 var docPython = CodeMirror.Doc(new Array(10).join(new Array(3).join('python ') + '\n'));
 cm.swapDoc(docJS);
-// cm.setOption('mode','javascript');
-
+cm.setOption('mode','javascript');
+cm.setOption('theme', 'default')
 function swapJS() {
   cm.swapDoc(docJS);
   cm.setOption('mode','javascript');
-  console.log("mode set to js")
 };
 
 function swapCPlus() {
   cm.swapDoc(docCPlus);
   cm.setOption('mode','clike');
-  console.log("mode set to c++")
-
 };
 function swapRuby() {
   cm.swapDoc(docRuby);
   cm.setOption('mode','ruby');
-  console.log("mode set to ruby")
-
 };
 function swapPython() {
   cm.swapDoc(docPython);
   cm.setOption('mode','python');
-  console.log("mode set to python")
-
 };
