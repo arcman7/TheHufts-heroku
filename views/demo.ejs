@@ -28,41 +28,26 @@
         </div>
       </div>
       <header id="header-one" class="dark-header header">
-      <div class="container-fluid">
-        <div class="menu-wrapper">
-          <nav id="navigation" role="navigation" class="navbar yamm">
+        <div class="container-fluid">
+          <div class="menu-wrapper">
             <div class="navbar-inner">
-              <div class="navbar-header"><a id="brand" href="/landingPage" class="clearfix navbar-brand"><img src="imgs/thehuftsbrain.png" alt="TheHufts" style="height:0;width:7%;height:7%" data-selector="img"/><img src="" alt="TheHufts" data-selector="img"/></a></div>
-              <!-- end navbar-header-->
-              <div id="navbar-collapse" class="navbar-right navbar-collapse collapse clearfix">
-                <ul class="nav navbar-nav">
-                  <!-- end mega menu-->
-                  <%if(!user){%>
-                    <li class="wps-full"><a id="logIn" href="/logIn">Log In</a></li>
-                    <li class="wps-full"><a id="signUp" href="/register">Sign Up</a></li>
-                  <%}else{%>
-                  <li class="wps-half"><a href="/dashboard">Dashboard</a></li>
-                    <li class="wps-full"><a href="#">Documentation</a>
-                    <li class="wps-full"><a id="signOut" href="/logout">Sign Out</a></li>
-                  <%}%>
-                  <!-- end navbar-right-->
-                </ul>
-                <div class="pull-right clearfix">
-                  <div class="right-menu"><span></span></div>
-                  <!-- end custom-menu-->
-                </div>
-                <!-- end widget-->
-              </div>
-              <!-- end navbar-callopse-->
-            </div>
-            <!-- end navbar-inner-->
-          </nav>
-          <!-- end navigation-->
-        </div>
-        <!-- menu wrapper-->
-      </div>
-    </header>
-    <!-- end header-->
+              <div class="navbar-header"><a id="brand" href="/landingPage" class="clearfix navbar-brand"><img src="imgs/thehuftsbrain.png" alt="TheHufts" style="height:0;width:7%;height:7%" data-selector="img"/><img src="" alt="TheHufts" data-selector="img"/></a>
+              </div> <!-- end navbar-header-->
+                <div class="navbar-right clearfix">
+                  <ul class="nav navbar-nav">
+                    <%if(!user){%>
+                      <li class="wps-full"><a id="logIn" href="/logIn">Log In</a></li>
+                      <li class="wps-full"><a id="signUp" href="/register">Sign Up</a></li>
+                    <%}else{%>
+                      <li class="wps-full"><a href="/dashboard">Dashboard</a>
+                      <li class="wps-full"><a id="signOut" href="/logout">Sign Out</a></li>
+                    <%}%>
+                  </ul>
+                </div> <!-- end navbar-right-->
+            </div> <!-- end navbar inner -->
+          </div> <!-- end menu wrapper-->
+        </div> <!-- end container fluid -->
+      </header> <!-- end header-->
       <div class="container">
         <h1 style="font-size: 100px; margin:0 0 0 auto; height: 15%">Welcome to the docs</h1>
         <div class="row">
